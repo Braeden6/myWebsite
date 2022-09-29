@@ -2,11 +2,11 @@ import './navBar.css'
 import {Container, Nav, Navbar, NavDropdown} from 'react-bootstrap'
 
 // https://react-bootstrap.github.io/components/navbar/
-export default function Menu() {
+export default function NavBar(style) {
   return (
     <Container>
     <div className="mt-5"></div>
-        <Navbar bg="translucent" variant="dark" expand="md">
+        <Navbar bg="translucent" variant={style.variant} expand="md">
         <div className="mx-5"></div>
         <Container>
             <Navbar.Brand href="/">
@@ -16,7 +16,8 @@ export default function Menu() {
             <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
                 <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/resume" class="font-weight-bold">Resume</Nav.Link>
+                <Nav.Link href="/resume" className="font-weight-bold">Resume</Nav.Link>
+                <Nav.Link href="/practice">Practice</Nav.Link>
                 <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">

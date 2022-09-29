@@ -1,7 +1,5 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+# Braeden's Personal Website
+This website is for practice and displaying my programming abilities along side my resume.
 ## Available Scripts
 
 In the project directory, you can run:

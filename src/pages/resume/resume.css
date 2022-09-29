@@ -1,0 +1,68 @@
+.container ul{
+    margin-bottom: 0;
+}
+
+#all {
+    background-color: white;
+}
+
+#resume {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    align-self: center;
+    max-width: 900px;
+    margin: auto;
+}
+
+#name {
+    padding-top: 2rem;
+    text-align: center;
+    color: blue;
+    margin-bottom: 0%;
+}
+
+#below-title{
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+#technical {
+    color: blue;
+    margin-bottom: 0;
+}
+
+#technical-line {
+    height:2px;
+    background-color: black;
+}
+
+#link {
+    text-decoration: underline;
+    color: blue;
+}
+
+#grid {
+    overflow: hidden;
+}
+
+#input-template-date{
+    text-align: right;
+    padding-right: 1rem;
+}
+
+#technologies-title{
+    font-weight: 650;
+}
+
+#technologies {
+    padding-left: 1.5rem;
+}
+
+#template-title{
+    font-weight: 650;
+    font-size: 1.2rem;
+}
+
+#template-small{
+    font-size: 0.9rem;
+}
