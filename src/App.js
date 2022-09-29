@@ -1,8 +1,9 @@
+import React from "react";
 import './App.css';
 import Main from './pages/main/main';
 import { Route, Routes} from 'react-router-dom';
 import Resume from './pages/resume/resume';
-import Practice from './pages/pratice/pratice';
+import Practice from './pages/practice/practice';
 
 function App() {
   return (
