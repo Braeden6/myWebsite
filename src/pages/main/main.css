@@ -1,3 +1,9 @@
+.container ul{
+  margin-bottom: 0;
+  background-color: white;
+}
+
+
 
 #mainVideo {
     position: fixed;
@@ -6,5 +12,18 @@
     right: 0;
     height: auto;
     width: auto;
+  }
+
+  #main {
+    position: absolute;
+    left: 0;
+    right: 0;
+    color: gray;
+    text-align: center;
+  }
+
+  #line {
+    height:2px;
+    background-color: black;
   }
   

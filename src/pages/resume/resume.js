@@ -1,115 +1,77 @@
+import React from 'react';
 import "./resume.css"
-import {Tooltip, OverlayTrigger, Container, Row, Col, Stack} from 'react-bootstrap';
 import NavBar from "../../components/navBar/navBar";
 import inputResume from "./resume.json";
+import ResumeBuilder from "./resumeBuilder";
+import { useState, useEffect } from "react";
+import * as ReactDOM from "react-dom/client";
+import  { useNavigate } from 'react-router-dom'
+import {Stack, Button} from 'react-bootstrap';
 
 export default function Resume() {
+  const [data, setData] = useState(null);
+  let Navigate = useNavigate();
+
+    useEffect(() => {
+      fetch(process.env.NODE_ENV === "production"? "https://backend-2015.azurewebsites.net/api/sendHello": "http://localhost:7071/api/HttpTrigger1")
+      .then((res) => res.json())
+      .then((data) => setData(data.message));
+  }, []);
+  
+  
+  async function printPDF() {
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    await root.render(<React.StrictMode><ResumeBuilder resume={inputResume}/></React.StrictMode>)
+    await window.print()
+    Navigate("/resume");
+    window.parent.location = window.parent.location.href;
+  }
+  // <p>{!data ? "Loading...." : data}</p>
   return (
       <div id="all">
         <NavBar variant="light"/>
-        <div id="resume">
-          <h1 id ="name">{inputResume.name}</h1>
-          <div id="below-title">
-            <div>
-              <OverlayTrigger
-                key="top"
-                placement="top"
-                overlay={
-                  <Tooltip ><strong>Click</strong> to Copy.</Tooltip>
-                }>
-                <label id="link" onClick={() => navigator.clipboard.writeText(inputResume.email)}>{inputResume.email}</label>
-              </OverlayTrigger>     
-              <span> | {inputResume.phoneNumber} | </span>
-              <a href={inputResume.GitHub} target="_blank" rel="noreferrer">GitHub</a>
-              <span> | </span>
-              <a href={inputResume.LinkedIn} target="_blank" rel="noreferrer">Linkedin</a>
-              </div>
-              <div>
-                <label>{inputResume.titleFacts.join(" | ")}</label>
-              </div>
-            </div>
-              {getAllTechSkills(inputResume.techSkills)}
-              {getSection("Personal Projects", inputResume.personalProjects)}
-              {getSection("Work Experience", inputResume.workExperience)}
-              {getSection("Education", inputResume.education)}
-              {getSection("Licenses & Certifications", inputResume.licenses)}
-          </div>
+        <Stack className='col-md-1 mx-auto'>
+          <Button  variant='secondary' onClick={ () => {
+            printPDF();
+              }}>Print to Pdf</Button>
+        </Stack>
+        <ResumeBuilder resume={inputResume}/>
         </div>
   )
   }
 
-  function getAllTechSkills(list) {
-    let skills = []
-    for (let i = 0; i < list.length; i++) {
-      skills.push(getTechSkillTemplate(list[i].title + ":", list[i].list))
-    }
-    return (
-        <div>
-          <h2 id="technical">Technical Skills</h2>
-          <hr id="technical-line"></hr>
-          <Container id="grid">
-            {skills}
-          </Container>
-        </div>
-    )
+  async function toPdf() {
+    
+    console.log("test")
+  }
+
+  function test(){
+    fetch(process.env.NODE_ENV === "production"? "https://backend-2015.azurewebsites.net/api/sendHello": "http://localhost:7071/api/HttpTrigger1", {
+      method: 'POST',
+      body: JSON.stringify({name: "Test", html: <ResumeBuilder resume={inputResume}/>})
+    })
+    .then((res) => res.json())
+    .then((data) => console.log(data.message));
+    
 
   }
 
-  function getTechSkillTemplate(title, skills) {
-    return (
-      <Row>
-        <Col xs="1"></Col>
-        <Col xs="4"><strong>{title}</strong></Col>
-        <Col xs="6">{skills.join(", ")}</Col>
-      </Row>
-    )
-  }
 
-  function getSection(name, list) {
-    let subSections = []
-    for (let i = 0; i < list.length; i++) {
-      subSections.push(getInputTemplate(list[i].title, list[i].date, list[i].list, list[i].technologies, list[i].subTitle))
-    }
 
-    return (
-        <div>
-          <h2 id="technical">{name}</h2>
-          <hr id="technical-line"></hr>
-          {subSections}
-        </div>
-    )
-  }
-
-  function getInputTemplate(title, date, list, technologies, subTitle) {
-    let items = []
-    for (let i = 0; i < list.length; i++) {
-      items.push(<li key={"list" + i}>{list[i]}</li>)
-    }
-      return (
-        <Container id="grid">
-            <Row>
-              <Stack direction="horizontal">
-                <Col xs="1"></Col>
-                <div id="template-title">{title}</div>
-                <div id="template-small" className="ms-auto"> {date}</div>
-              </Stack>
-              <Stack direction="horizontal">
-                <Col xs="1"></Col>
-                <div id="template-small">{subTitle? subTitle:""}</div>
-              </Stack>
-            </Row>
-            <Row>
-              <Col xs="1"></Col>
-              <Col><ul>{items}</ul></Col>
-            </Row>
-            <Row>
-            {technologies ?
-                <>
-                  <Col xs="1"></Col>
-                  <Col id="technologies"><span id="technologies-title">Technologies: </span>{technologies.join(", ")}</Col>
-                  </>: <></>}
-            </Row>
-            <div className="my-2"></div>
-          </Container>
-      )
-  }
+  /*
+function App() {
+  const [data, setData] = React.useState(null);
+  React.useEffect(() => {
+    fetch(process.env.NODE_ENV === "production"? "https://backend-2015.azurewebsites.net/api/sendHello": "/api/sendHello")
+      .then((res) => res.json())
+      .then((data) => setData(data.message));
+  }, []);
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>{!data ? "Loading...." : data}</p>
+      </header>
+    </div>
+  );
+}*/

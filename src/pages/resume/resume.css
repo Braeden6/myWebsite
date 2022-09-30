@@ -1,12 +1,13 @@
 .container ul{
     margin-bottom: 0;
+    background-color: white;
 }
-
 #all {
     background-color: white;
 }
 
 #resume {
+    background-color: white;
     padding-left: 2rem;
     padding-right: 2rem;
     align-self: center;
