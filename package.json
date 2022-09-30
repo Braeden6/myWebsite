@@ -1,0 +1,16 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "nodemon start",
+    "start": "func start",
+    "test": "echo \"No tests yet...\""
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "@react-pdf/renderer": "^3.0.0"
+  }
+}
