@@ -36,29 +36,22 @@ export default function ResumeBuilder(input) {
 
     
   function getAllSections(sections) {
-    let allSections = [];
-    for (let i = 0; i < sections.length; i++) {
-      allSections.push(getSection(sections[i]))
-    }
     return (
       <>
-      {allSections}
+      {sections.map( (e,idx) => getSection(e,idx))}
       </>
     )
   }
 
 
-  function getSection(section) {
-    let subSections = []
-    for (let i = 0; i < section.subsections.length; i++) {
-      subSections.push(eval(section.templateFunction + "(section.subsections[i])"))
-    }
+  function getSection(section,idx) {
+    // eval calls saved template function name from json file
     return (
-        <div>
+        <>
           <h2 id="technical">{section.sectionTitle}</h2>
-          <hr id="technical-line"></hr>
-          {subSections}
-        </div>
+          <hr></hr>
+          {section.subsections.map( (e,idx) => eval(section.templateFunction + "(e)"))}
+        </>
     )
   }
 
@@ -66,7 +59,7 @@ export default function ResumeBuilder(input) {
     return (
       <Container id="grid">
         <Row>
-          <Col xs="1"></Col>
+          <Col xs="1"/>
           <Col xs="4"><strong>{section.title + ":"}</strong></Col>
           <Col xs="6">{section.list.join(", ")}</Col>
         </Row>
@@ -75,35 +68,33 @@ export default function ResumeBuilder(input) {
   }
 
   function getBasicTemplate(section) {
-    let items = []
-    for (let i = 0; i < section.list.length; i++) {
-      items.push(<li key={"list" + i}>{section.list[i]}</li>)
-    }
       return (
         <Container id="grid">
             <Row>
               <Stack direction="horizontal">
-                <Col xs="1"></Col>
+                <Col xs="1"/>
                 <div id="template-title">{section.title}</div>
                 <div id="template-small" className="ms-auto"> {section.date}</div>
               </Stack>
               <Stack direction="horizontal">
-                <Col xs="1"></Col>
+                <Col xs="1"/>
                 <div id="template-small">{section.subTitle? section.subTitle:""}</div>
               </Stack>
             </Row>
             <Row>
-              <Col xs="1"></Col>
-              <Col><ul>{items}</ul></Col>
+              <Col xs="1"/>
+              <Col>
+                <ul>
+                  {section.list.map( (e,idx) => <li key={idx}>{e}</li>)}
+                </ul>
+              </Col>
             </Row>
             <Row>
-            {section.technologies ?
-                <>
-                  <Col xs="1"></Col>
+            {section.technologies ? <><Col xs="1"></Col>
                   <Col id="technologies"><span id="technologies-title">Technologies: </span>{section.technologies.join(", ")}</Col>
                   </>: <></>}
-            </Row>
-            <div className="my-2"></div>
-          </Container>
+          </Row>
+          <div className="my-2"></div>
+        </Container>
       )
   }

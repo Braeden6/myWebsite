@@ -17,7 +17,7 @@ export default function NavBar(style) {
             <Nav className="ms-auto">
                 <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="/resume" className="font-weight-bold">Resume</Nav.Link>
-                <Nav.Link href="/#practice">Practice</Nav.Link>
+                <Nav.Link href="/practice">Practice</Nav.Link>
                 <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">

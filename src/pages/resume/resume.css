@@ -2,6 +2,7 @@
     margin-bottom: 0;
     background-color: white;
 }
+
 #all {
     background-color: white;
 }
@@ -32,7 +33,7 @@
     margin-bottom: 0;
 }
 
-#technical-line {
+.container hr {
     height:2px;
     background-color: black;
 }
