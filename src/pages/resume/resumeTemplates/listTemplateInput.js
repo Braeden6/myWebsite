@@ -1,21 +1,9 @@
-import "./../resume/resume.css"
-import NavBar from "../../components/navBar/navBar";
-import { TemplateMap } from "../resume/resumeTemplates/templateMap";
+import "../resume.css"
 import { Button, Form, Stack, Col } from "react-bootstrap";
-import { useState, useEffect } from "react";
-import TechSkillTemplateInput from "../resume/resumeTemplates/techSkillTemplateInput";
-import TechSkillTemplate from "../resume/resumeTemplates/techSkillTemplate";
-import ListTemplateInput from "../resume/resumeTemplates/listTemplateInput";
+import { useState } from "react";
+import TechSkillTemplateInput from "./techSkillTemplateInput";
 
-export default function Practice() {
-  let initSectionBasic = {
-    "title": "Sudoku Solver",
-    "date": "Aug 2022 - Current",
-    "list": ["Made a Sudoku solver app, in which you can use multiple different algorithms to solve sudoku puzzles to test and compare process speed",
-        "Implemented solver with search tree, breadth-first search and depth-first search, and other heuristics to speed up process time",
-        "Created a GUI with pyside6 that displays step-by-step solutions and allows you to solve puzzles yourself"],
-    "technologies":    [ "Python", "Pyside6", "Pandas", "Numpy", "Github"] 
-  }
+export default function ListTemplateInput() {
   let initSectionSkill = {
     "sectionTitle": "Technical Skills",
     "templateType": "TechSkillTemplate",
@@ -32,21 +20,7 @@ export default function Practice() {
 }
 
 
-  const Input = TemplateMap["BasicTemplateInput"]
-  const Display = TemplateMap["BasicTemplate"]
-
-  const [sectionBasic, changeSectionBasic] = useState(initSectionBasic)
   const [sectionSkill, changeSectionSkill] = useState(initSectionSkill)
-  /*
-  <Input section={sectionBasic} func={changeSectionBasic}></Input>
-          <Display section={sectionBasic} ></Display>
-  */
-
-  useEffect(() => {
-    //console.log(sectionSkill)
-    
-  }, [sectionSkill]);
-
 
   function changeSubsection (newSubsection, idx) {
     changeSectionSkill((prevState) => {
@@ -79,24 +53,15 @@ export default function Practice() {
     )
   }
 
-  let list = getList()
-
-
   return (
-    <div id="all">
-        <NavBar variant="light"/>
-        <div id="resume">
-          <ListTemplateInput/>
-
-
-
-
-          {sectionSkill.subsections.map( (e,idx) =>
-                  <TechSkillTemplate section={e}/>)}
-
-
-        </div>
-        
-    </div>
+    <>
+      <Form.Control defaultValue={sectionSkill.sectionTitle}></Form.Control>
+      <hr/>
+      {getList()}
+      <Stack direction="horizontal">
+        <Col xs="1" key="spacer"/>
+        <Button  onClick={addSubsection}>Add Line</Button>
+      </Stack>
+    </>
   )
   }

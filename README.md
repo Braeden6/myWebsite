@@ -1,5 +1,5 @@
 # Braeden's Personal Website
-This website is for practice and displaying my programming abilities along side my resume.
+This website is for practice and for displaying my programming abilities along side my resume.
 ## Available Scripts
 
 In the project directory, you can run:

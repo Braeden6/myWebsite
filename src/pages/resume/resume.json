@@ -8,7 +8,7 @@
     "sections": [
         {
             "sectionTitle": "Technical Skills",
-            "templateFunction": "getTechSkillTemplate",
+            "templateType": "TechSkillTemplate",
             "subsections": [
                 { 
                     "title" : "Programming Languages",
@@ -22,7 +22,7 @@
         },
         {
             "sectionTitle": "Personal Projects",
-            "templateFunction": "getBasicTemplate",
+            "templateType": "BasicTemplate",
             "subsections": [
                     {
                         "title": "Sudoku Solver",
@@ -62,7 +62,7 @@
         },
         {
             "sectionTitle": "Work Experience",
-            "templateFunction": "getBasicTemplate",
+            "templateType": "BasicTemplate",
             "subsections": [
                     {
                         "title": "Software Engineer", 
@@ -102,7 +102,7 @@
         },
         {
             "sectionTitle": "Education",
-            "templateFunction": "getBasicTemplate",
+            "templateType": "BasicTemplate",
             "subsections": [
                 {
                     "title": "The University of British Columbia",
@@ -126,7 +126,7 @@
         },
         {
             "sectionTitle": "Licenses & Certifications",
-            "templateFunction": "getBasicTemplate",
+            "templateType": "BasicTemplate",
             "subsections": [
                 {
                     "title": "Machine Learning with Python: A Practical Introduction - IBM ",
