@@ -39,7 +39,7 @@ export default function Resume() {
               }}>Print to Pdf</Button>
         </Stack>
         <ResumeBuilder resume={inputResume}/>
-        </div>
+      </div>
   )
   }
 

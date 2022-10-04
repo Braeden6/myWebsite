@@ -1,66 +1,62 @@
 import "../resume.css"
-import { Button, Form, Stack, Col } from "react-bootstrap";
-import { useState } from "react";
-import TechSkillTemplateInput from "./techSkillTemplateInput";
+import { Button, Stack, Col } from "react-bootstrap";
 
-export default function ListTemplateInput() {
-  let initSectionSkill = {
-    "sectionTitle": "Technical Skills",
-    "templateType": "TechSkillTemplate",
-    "subsections": [
-        { 
-            "title" : "Programming Languages",
-            "list": ["C", "C++", "Java", "TypeScript", "Python", "JavaScript", "HTML", "CSS",
-            "Visual Basic", "MATLAB", "R", "Julia", "JSX" ]
-        },{
-            "title" : "Technologies",
-            "list": [ "IntelliJ", "Visual Studios", "Microsoft Office", "Azure", "Node.js",
-            "React", "Bootstrap", "Serverless Computing", "Cosmos DB" ] 
-        }]
-}
+export default function ListTemplateInput(props) {
+  let list = props.list
+  let updateList = props.func
+  let Type = props.type
+  let addListDefault = props.addListDefault
+  let enableBulletPoint = props.enableBulletPoint? true: false
+  let changeWithIndex = props.changeWithIndex? true: false
 
 
-  const [sectionSkill, changeSectionSkill] = useState(initSectionSkill)
+  function addSubsection() {
+    list[list.length] = addListDefault
+    updateList(list)
+  }
 
-  function changeSubsection (newSubsection, idx) {
-    changeSectionSkill((prevState) => {
-      var newList = [...prevState.subsections]
-      newList[idx] = newSubsection
-      return ({...prevState, subsections : newList })
-    })
+  function changeSubsectionWithIndex (newSubsection, idx) {
+    list[idx] = newSubsection
+    updateList(list)
+  }
+
+  function changeSubsectionWithoutIndex (e) {
+    list[parseInt(e.currentTarget.id)] = e.target.value
+    updateList(list)
   }
 
   function removeSubsection(e) {
-    changeSectionSkill((prevState) => {
-      var newList = [...prevState.subsections]
-      newList = newList.filter((item, index) => index !== parseInt(e.target.id))
-      return ({...prevState, subsections : newList})
-    })
+    list.splice(parseInt(e.target.id), 1)
+    updateList(list)
   }
 
-  function addSubsection() {
-    changeSectionSkill( prevState => ({...prevState, 
-    subsections: [...prevState.subsections, { "title":"", "list": []}]}))
+  // TODO: add move up and down button
+  function getItem(e,idx) {
+    return (
+      <Stack className="ms-auto" direction="horizontal">
+        <Type id={idx.toString()} value={e} section={e} idx={idx} as="textarea" onChange={changeWithIndex ? changeSubsectionWithIndex : changeSubsectionWithoutIndex}/>
+        <Stack className="mb-auto" direction="horizontal">
+          <Button size="sm" id={idx} onClick={removeSubsection}>-</Button>
+          <Button size="sm">^</Button>
+          <Button size="sm">v</Button>
+        </Stack>
+      </Stack>
+    )
   }
 
   function getList() {
     return (
-      sectionSkill.subsections.map( (e,idx) => 
-        <Stack className="ms-auto" direction="horizontal">
-          <TechSkillTemplateInput id={idx.toString()} section={e} sections={sectionSkill.subsections} idx={idx} func={changeSubsection}/>
-          <Button id={idx} onClick={removeSubsection}>remove</Button>
-        </Stack>)
+      list.map( (e,idx) => <>{enableBulletPoint? <li>{getItem(e,idx)}</li> : getItem(e,idx)}</>)
     )
   }
 
+
   return (
     <>
-      <Form.Control defaultValue={sectionSkill.sectionTitle}></Form.Control>
-      <hr/>
-      {getList()}
+      {enableBulletPoint? <ul>{getList()}</ul> : getList()}
       <Stack direction="horizontal">
         <Col xs="1" key="spacer"/>
-        <Button  onClick={addSubsection}>Add Line</Button>
+        <Button  onClick={addSubsection}>+</Button>
       </Stack>
     </>
   )

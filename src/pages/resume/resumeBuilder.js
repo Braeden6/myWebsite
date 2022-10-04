@@ -51,7 +51,7 @@ export default function ResumeBuilder(input) {
         <>
           <h2 id="technical">{section.sectionTitle}</h2>
           <hr></hr>
-          {section.subsections.map( (e,idx) => {
+          {section.list.map( (e,idx) => {
             const Tag = TemplateMap[section.templateType] 
             return (<Tag section={e}/>)
           })}

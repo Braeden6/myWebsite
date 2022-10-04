@@ -9,7 +9,7 @@
         {
             "sectionTitle": "Technical Skills",
             "templateType": "TechSkillTemplate",
-            "subsections": [
+            "list": [
                 { 
                     "title" : "Programming Languages",
                     "list": ["C", "C++", "Java", "TypeScript", "Python", "JavaScript", "HTML", "CSS",
@@ -23,7 +23,7 @@
         {
             "sectionTitle": "Personal Projects",
             "templateType": "BasicTemplate",
-            "subsections": [
+            "list": [
                     {
                         "title": "Sudoku Solver",
                         "date": "Aug 2022 - Current",
@@ -63,7 +63,7 @@
         {
             "sectionTitle": "Work Experience",
             "templateType": "BasicTemplate",
-            "subsections": [
+            "list": [
                     {
                         "title": "Software Engineer", 
                         "subTitle": "Voronoi Health Analytics Inc.",
@@ -103,7 +103,7 @@
         {
             "sectionTitle": "Education",
             "templateType": "BasicTemplate",
-            "subsections": [
+            "list": [
                 {
                     "title": "The University of British Columbia",
                     "subTitle": "Bachelor of Science- BS, Computer Science",
@@ -127,7 +127,7 @@
         {
             "sectionTitle": "Licenses & Certifications",
             "templateType": "BasicTemplate",
-            "subsections": [
+            "list": [
                 {
                     "title": "Machine Learning with Python: A Practical Introduction - IBM ",
                     "subTitle": "Credential ID d8efcd09c8fb43f5af86b02a11c2704e",

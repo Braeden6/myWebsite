@@ -7,9 +7,8 @@ import React from "react";
 class TechSkillTemplateInput extends React.Component {
     constructor(props) {
         super()
-        this.sections = props.sections
         this.section = props.section
-        this.changeSection = props.func
+        this.changeSection = props.onChange
         this.idx = props.idx
     }
 

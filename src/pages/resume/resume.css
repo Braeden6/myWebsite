@@ -1,9 +1,5 @@
-.container ul{
-    margin-bottom: 0;
-    background-color: white;
-}
 
-#all {
+#all, html {
     background-color: white;
 }
 

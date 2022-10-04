@@ -4,17 +4,17 @@ import Main from './pages/main/main';
 import { Route, Routes} from 'react-router-dom';
 import Resume from './pages/resume/resume';
 import Practice from './pages/practice/practice';
+import ResumeInputBuilder from "./pages/resume/resumeInputBuilder";
 
 function App() {
   return (
     <>
-      <div className="container"> 
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/resume" element={<Resume />} />
           <Route path="/practice" element={<Practice />}/>
+          <Route path="/resumeBuilder" element={<ResumeInputBuilder/>}/>
         </Routes>
-      </div>
     </>
   );
 }
