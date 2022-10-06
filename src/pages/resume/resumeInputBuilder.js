@@ -1,61 +1,85 @@
 import "./../resume/resume.css"
 import NavBar from "../../components/navBar/navBar";
 import { TemplateMap } from "../resume/resumeTemplates/templateMap";
-import { Form } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { Form, Stack } from "react-bootstrap";
+import { useState } from "react";
 import ListTemplateInput from "../resume/resumeTemplates/listTemplateInput";
 import inputResume from "./resume.json";
+import ResumeBuilder from "./resumeBuilder";
 
 export default function ResumeInputBuilder() {
-  
-  const [sectionBasic, changeSectionBasic] = useState(inputResume.sections[1])
-  const [sectionSkill, changeSectionSkill] = useState(inputResume.sections[0])
-  console.log(sectionSkill)
-  function updateList(newList) {
+  const [sectionSkill, changeSectionSkill] = useState(inputResume)
+  function updateList(newList, idx) {
     changeSectionSkill((prevState) => {
-      return ({...prevState, list : newList })
+      var newSections = prevState.sections
+      newSections[idx].list = newList
+      return ({...prevState, sections : newSections })
     })
   }
 
-  function updateListBasic(newList) {
-    changeSectionBasic((prevState) => {
-      return ({...prevState, list : newList })
+  function updateTitle(newTitle, idx) {
+    changeSectionSkill((prevState) => {
+      var newSections = prevState.sections
+      newSections[idx].sectionTitle = newTitle
+      return ({...prevState, sections: newSections })
     })
   }
 
-  useEffect(() => {
-    console.log(sectionSkill)
-  }, [sectionSkill]);
+  function updateSections(newSections) {
+    changeSectionSkill((prevState) => {
+      return ({...prevState, sections: newSections })
+    })
+  }
 
-  useEffect(() => {
-    console.log(sectionBasic)
-  }, [sectionBasic]);
+
+  let Type = (props) => {
+    return (GetSection({
+      section: props.value,
+      idx: props.idx,
+      updateTitle: updateTitle,
+      updateFunction: updateList
+    }))
+  }
+
   
+
+
   return (
     <div id="all">
         <NavBar variant="light"/>
         <div id="resume">
-            
-        {getSection(sectionBasic, updateListBasic)}
-        {getSection(sectionSkill, updateList)}
-
-            
+         <ListTemplateInput list={sectionSkill.sections} func={updateSections} addListDefault={{ "title":"", "templateType": "BasicTemplate", "list": []}} type={Type}/>
           
-
+        <ResumeBuilder resume={inputResume}/>
         </div>
         
     </div>
   )
   }
 
-  function getSection(section, updateFunction) {
-    console.log(section)
-        const Input = TemplateMap[section.templateType + "Input"]
-        return (
-            <>
-                <Form.Control defaultValue={section.sectionTitle}/>
-                <hr/>
-                <ListTemplateInput list={section.list} func={updateFunction} addListDefault={{ "title":"", "list": []}} type={Input} changeWithIndex={true}/>
-            </>
-        )    
+  function GetSection(props) {
+    let section = props.section
+    let updateFunction = props.updateFunction
+    let updateTitle = props.updateTitle
+    let idx = props.idx
+    const Input = TemplateMap[section.templateType + "Input"]
+    const func = (newList) => {updateFunction(newList, idx)}
+
+    let Type = (props) => {
+      return (<Input 
+          onChange={props.onChange}
+          section={props.value}
+          idx={props.idx}
+      />)
     }
+
+    return (
+      <> 
+        <Stack direction="vertical">
+          <Form.Control defaultValue={section.sectionTitle} onChange={(e) => {updateTitle(e.target.value, idx)}}/>
+          <hr/>
+          <ListTemplateInput list={section.list} func={func} addListDefault={{ "title":"", "list": []}} type={Type}/>
+          </Stack>
+      </>
+    )    
+  }

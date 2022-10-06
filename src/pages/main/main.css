@@ -1,24 +1,41 @@
-.container ul{
-  margin-bottom: 0;
-  background-color: white;
+#mainImage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
 }
 
-#mainVideo {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    height: auto;
-    width: auto;
-  }
-
+@media only screen and (max-width: 768px) {
+  
   #main {
-    position: absolute;
-    left: 0;
+    position: fixed;
+    top:25%;
+    left: 10%;
     right: 0;
-    color: gray;
+    color: rgb(146, 146, 146);
+    text-align: center;
+    height: 50%;
+    width: 80%;
     text-align: center;
   }
+}
+
+@media only screen and (min-width: 768px) {
+  #main {
+    position: fixed;
+    top:25%;
+    left: 40%;
+    right: 0;
+    color: rgb(146, 146, 146);
+    text-align: center;
+    height: 50%;
+    width: 20%;
+    text-align: center;
+  }
+}
+
+
 
   #line {
     height:2px;

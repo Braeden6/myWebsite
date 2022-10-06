@@ -1,6 +1,6 @@
 
 import "./resume.css"
-import {Tooltip, OverlayTrigger, Container, Row, Col, Stack} from 'react-bootstrap';
+import {Tooltip, OverlayTrigger} from 'react-bootstrap';
 import { TemplateMap } from "./resumeTemplates/templateMap";
 
 

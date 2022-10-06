@@ -6,7 +6,7 @@ export default function NavBar(style) {
   return (
     <>
         <div className="mt-5"></div>
-        <Navbar bg="translucent"variant={style.variant} expand="xxl">
+        <Navbar bg="translucent"variant={style.variant} expand="md">
         <div className="mx-5"></div>
         <Container fluid>
             <Navbar.Brand href="/">Braeden Norman</Navbar.Brand>

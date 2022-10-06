@@ -7,7 +7,8 @@ export default function ListTemplateInput(props) {
   let Type = props.type
   let addListDefault = props.addListDefault
   let enableBulletPoint = props.enableBulletPoint? true: false
-  let changeWithIndex = props.changeWithIndex? true: false
+  if (list === undefined) return
+  if (updateList === undefined) return
 
 
   function addSubsection() {
@@ -15,13 +16,8 @@ export default function ListTemplateInput(props) {
     updateList(list)
   }
 
-  function changeSubsectionWithIndex (newSubsection, idx) {
+  function changeSubsection(newSubsection, idx) {
     list[idx] = newSubsection
-    updateList(list)
-  }
-
-  function changeSubsectionWithoutIndex (e) {
-    list[parseInt(e.currentTarget.id)] = e.target.value
     updateList(list)
   }
 
@@ -29,12 +25,12 @@ export default function ListTemplateInput(props) {
     list.splice(parseInt(e.target.id), 1)
     updateList(list)
   }
-
+ 
   // TODO: add move up and down button
   function getItem(e,idx) {
     return (
-      <Stack className="ms-auto" direction="horizontal">
-        <Type id={idx.toString()} value={e} section={e} idx={idx} as="textarea" onChange={changeWithIndex ? changeSubsectionWithIndex : changeSubsectionWithoutIndex}/>
+      <Stack direction="horizontal">
+        {Type({id:idx.toString(), value: e, idx: idx, onChange: changeSubsection})}
         <Stack className="mb-auto" direction="horizontal">
           <Button size="sm" id={idx} onClick={removeSubsection}>-</Button>
           <Button size="sm">^</Button>
@@ -53,7 +49,9 @@ export default function ListTemplateInput(props) {
 
   return (
     <>
+      <Stack direction="vertical">
       {enableBulletPoint? <ul>{getList()}</ul> : getList()}
+      </Stack>
       <Stack direction="horizontal">
         <Col xs="1" key="spacer"/>
         <Button  onClick={addSubsection}>+</Button>

@@ -13,6 +13,7 @@ export default function BasicTemplateInput(props) {
     const [enableSubtitle, changeSubtitleState] = useState(section.subTitle !== undefined);
     const [enableTechnology, changeTechnologyState] = useState(section.technologies !== undefined);
 
+
     // remove subtitle if unchecked
     useEffect(() => {
         if (!enableSubtitle) {
@@ -28,14 +29,6 @@ export default function BasicTemplateInput(props) {
             changeSection(section) 
         } 
     }, [enableTechnology]);
-
-    // remove technologies from section if input is empty
-    useEffect(() => {
-        if (section.technologies && section.technologies.length === 0) {
-            delete section.technologies
-            changeSection(section)
-        } 
-    }, [section]);
 
 
     function updateListBasic(newList) {
@@ -59,6 +52,24 @@ export default function BasicTemplateInput(props) {
         changeSection(section, idx)
     }
 
+    function changeTechnologies(e) {
+        if (e.target.value === "") 
+            delete section.technologies
+        else 
+            section.technologies = e.target.value.split(/,| ,| , /).filter((item) => item.trim().length !== 0)
+        changeSection(section, idx)
+    }
+
+    let Type = (props) => {
+        return (<Form.Control 
+            as="textarea" 
+            onChange={(e) => { 
+                props.onChange(e.target.value, props.idx)}}
+            value={props.value}
+            idx={props.idx}
+        />)
+    }
+
     return (
         <Stack direction="horizontal">
         <Container id="grid">
@@ -75,19 +86,14 @@ export default function BasicTemplateInput(props) {
             <Stack direction="horizontal">
                 <Col xs="1"></Col>
                 <Stack direction="vertical">
-                <ListTemplateInput list={section.list} func={updateListBasic} type={Form.Control} enableBulletPoint={true} changeWithIndex={false}/>
+                <ListTemplateInput list={section.list} func={updateListBasic} type={Type} enableBulletPoint={true} changeWithIndex={true}/>
                 </Stack>
             </Stack>
             </Stack>
             <Row>
                 <InputGroup direction="horizontal">
                     <Form.Check label="add technologies" checked={enableTechnology} id="technology" className="mx-1" onChange={() =>{changeTechnologyState(!enableTechnology)}}/>
-                    {enableTechnology? <Form.Control placeholder="technologies" as="textarea" size="sm" defaultValue={section.technologies ? section.technologies.join(", ") : ""} onChange={(e) =>
-                                            changeSection(prevSate => ({...prevSate, 
-                                                                    technologies: e.target.value
-                                                                        .split(/,| ,| , /)
-                                                                        .filter((item) => item.trim().length !== 0)
-                                                                    }))}/>: <></>}
+                    {enableTechnology? <Form.Control placeholder="technologies" as="textarea" size="sm" defaultValue={section.technologies ? section.technologies.join(", ") : ""} onChange={(e) => {changeTechnologies(e)}}/>: <></>}
                 </InputGroup>
             </Row>
             <div className="my-2"></div>

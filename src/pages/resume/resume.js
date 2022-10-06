@@ -11,14 +11,7 @@ import {Stack, Button} from 'react-bootstrap';
 export default function Resume() {
   const [data, setData] = useState(null);
   let Navigate = useNavigate();
-
-  /*
-    useEffect(() => {
-      fetch(process.env.NODE_ENV === "production"? "https://backend-2015.azurewebsites.net/api/sendHello": "http://localhost:7071/api/HttpTrigger1")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
-  */
+  
   
   async function printPDF() {
     const root = ReactDOM.createRoot(document.getElementById('root'));

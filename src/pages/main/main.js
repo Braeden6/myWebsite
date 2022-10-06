@@ -1,18 +1,21 @@
 import NavBar from "../../components/navBar/navBar"
-import main from './main.mp4';
+import main from './main.gif';
 import './main.css'
-import { Stack } from "react-bootstrap";
+import { Stack, Image } from "react-bootstrap";
 
 export default function Main() {
     return (
-      <div id="all">
-        <video src={main} autoPlay muted loop id="mainVideo"/>
+      <>     
+      <div id="mainAll">
+        <Image src={main} id="mainImage"/> 
         <NavBar variant="dark"/>
-          <Stack className='col-md-3 mx-auto mt-5 ' id="main" >
+          <Stack id="main" >
             <h1 className="mt-5">Braeden Norman's Resume Website</h1>
-            <hr id="line"></hr>
+            <hr id="line"/>
             <h2>Still under construction</h2>
           </Stack>
       </div>
+      </>
+
     )
   }
