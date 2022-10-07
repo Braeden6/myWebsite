@@ -1,5 +1,5 @@
 import "../resume.css"
-import { Button, Stack, Col } from "react-bootstrap";
+import { Button, Stack, Col, Container, ButtonGroup, DropdownButton, Dropdown } from "react-bootstrap";
 
 export default function ListTemplateInput(props) {
   let list = props.list
@@ -31,31 +31,24 @@ export default function ListTemplateInput(props) {
     return (
       <Stack direction="horizontal">
         {Type({id:idx.toString(), value: e, idx: idx, onChange: changeSubsection})}
-        <Stack className="mb-auto" direction="horizontal">
-          <Button size="sm" id={idx} onClick={removeSubsection}>-</Button>
-          <Button size="sm">^</Button>
-          <Button size="sm">v</Button>
+        <Stack direction="horizontal" className="mb-auto">
+        <DropdownButton as={ButtonGroup} title="" variant="primary">
+          <Dropdown.Item as="button">Move Up</Dropdown.Item>
+          <Dropdown.Item as="button">Move Down</Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item id={idx} onClick={removeSubsection} as="button">Remove</Dropdown.Item>
+        </DropdownButton>
         </Stack>
       </Stack>
     )
   }
 
-  function getList() {
-    return (
-      list.map( (e,idx) => <>{enableBulletPoint? <li>{getItem(e,idx)}</li> : getItem(e,idx)}</>)
-    )
-  }
 
 
   return (
-    <>
       <Stack direction="vertical">
-      {enableBulletPoint? <ul>{getList()}</ul> : getList()}
+        {list.map( (e,idx) => getItem(e,idx))}
+        <Button  onClick={addSubsection} className="mx-auto" size="md">+</Button>
       </Stack>
-      <Stack direction="horizontal">
-        <Col xs="1" key="spacer"/>
-        <Button  onClick={addSubsection}>+</Button>
-      </Stack>
-    </>
   )
   }

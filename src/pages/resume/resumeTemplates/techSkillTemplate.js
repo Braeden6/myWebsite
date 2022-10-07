@@ -10,7 +10,7 @@ export default function TechSkillTemplate(props) {
         <Row>
           <Col xs="1" key="spacer"/>
           <Col xs="4" key="title"><strong>{section.title + ":"}</strong></Col>
-          <Col xs="6"  key="list">{section.list.join(", ")}</Col>
+          <Col xs="6"  key="list">{section.descriptor}</Col>
         </Row>
       </Container>
     )

@@ -12,12 +12,10 @@
             "list": [
                 { 
                     "title" : "Programming Languages",
-                    "list": ["C", "C++", "Java", "TypeScript", "Python", "JavaScript", "HTML", "CSS",
-                    "Visual Basic", "MATLAB", "R", "Julia", "JSX" ]
+                    "descriptor": "C, C++, Java, TypeScript, Python, JavaScript, HTML, CSS, Visual Basic, MATLAB, R, Julia, JSX"
                 },{
                     "title" : "Technologies",
-                    "list": [ "IntelliJ", "Visual Studios", "Microsoft Office", "Azure", "Node.js",
-                    "React", "Bootstrap", "Serverless Computing", "Cosmos DB" ] 
+                    "descriptor": "IntelliJ, Visual Studios, Microsoft Office, Azure, Node.js, React, Bootstrap, Serverless Computing, Cosmos DB"
                 }]
         },
         {

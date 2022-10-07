@@ -71,33 +71,35 @@ export default function BasicTemplateInput(props) {
     }
 
     return (
-        <Stack direction="horizontal">
-        <Container id="grid">
-            <Stack>
-            <Col xs="1"></Col>
-            <InputGroup direction="horizontal">
-                <Form.Control id="template-title" placeholder={"Subsection Title"} defaultValue={section.title} onChange={(e) => {changeTitle(e)}}/>
-                <Form.Control placeholder={"MMM YYYY - (MMM YYYY or Current)"}  defaultValue={section.date} size="sm" onChange={(e) => {changeDate(e)}}/>
-            </InputGroup>
-            <InputGroup direction="horizontal">
-            <Form.Check label="add Subtitle" id="subTitle" className="mx-1" checked={enableSubtitle} onChange={() =>{changeSubtitleState(!enableSubtitle)}}/>
-            {enableSubtitle? <Form.Control placeholder="subtitle" defaultValue={section.subTitle} size="sm" onChange={(e) => {changeSubtitle(e)}}/>: <></>}
-            </InputGroup>
+        <Container>
             <Stack direction="horizontal">
+            <Container id="grid">
+                <Stack>
                 <Col xs="1"></Col>
-                <Stack direction="vertical">
-                <ListTemplateInput list={section.list} func={updateListBasic} type={Type} enableBulletPoint={true} changeWithIndex={true}/>
-                </Stack>
-            </Stack>
-            </Stack>
-            <Row>
                 <InputGroup direction="horizontal">
-                    <Form.Check label="add technologies" checked={enableTechnology} id="technology" className="mx-1" onChange={() =>{changeTechnologyState(!enableTechnology)}}/>
-                    {enableTechnology? <Form.Control placeholder="technologies" as="textarea" size="sm" defaultValue={section.technologies ? section.technologies.join(", ") : ""} onChange={(e) => {changeTechnologies(e)}}/>: <></>}
+                    <Form.Control placeholder={"Subsection Title"} defaultValue={section.title} onChange={(e) => {changeTitle(e)}}/>
+                    <Form.Control placeholder={"MMM YYYY - (MMM YYYY or Current)"}  defaultValue={section.date} size="sm" onChange={(e) => {changeDate(e)}}/>
                 </InputGroup>
-            </Row>
-            <div className="my-2"></div>
+                <InputGroup direction="horizontal">
+                <Form.Check label="add Subtitle" id="subTitle" className="mx-1" checked={enableSubtitle} onChange={() =>{changeSubtitleState(!enableSubtitle)}}/>
+                {enableSubtitle? <Form.Control placeholder="subtitle" defaultValue={section.subTitle} size="sm" onChange={(e) => {changeSubtitle(e)}}/>: <></>}
+                </InputGroup>
+                <Stack direction="horizontal">
+                    <Col xs="1"></Col>
+                    <Stack direction="vertical">
+                    <ListTemplateInput list={section.list} func={updateListBasic} type={Type} enableBulletPoint={true} changeWithIndex={true}/>
+                    </Stack>
+                </Stack>
+                </Stack>
+                <Row>
+                    <InputGroup direction="horizontal">
+                        <Form.Check label="add technologies" checked={enableTechnology} id="technology" className="mx-1" onChange={() =>{changeTechnologyState(!enableTechnology)}}/>
+                        {enableTechnology? <Form.Control placeholder="technologies" as="textarea" size="sm" defaultValue={section.technologies ? section.technologies.join(", ") : ""} onChange={(e) => {changeTechnologies(e)}}/>: <></>}
+                    </InputGroup>
+                </Row>
+                <div className="my-2"></div>
+            </Container>
+            </Stack>
         </Container>
-        </Stack>
     )
   }
