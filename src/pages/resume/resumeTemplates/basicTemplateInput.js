@@ -56,7 +56,7 @@ export default function BasicTemplateInput(props) {
         if (e.target.value === "") 
             delete section.technologies
         else 
-            section.technologies = e.target.value.split(/,| ,| , /).filter((item) => item.trim().length !== 0)
+            section.technologies = e.target.value
         changeSection(section, idx)
     }
 
@@ -77,15 +77,14 @@ export default function BasicTemplateInput(props) {
                 <Stack>
                 <Col xs="1"></Col>
                 <InputGroup direction="horizontal">
-                    <Form.Control placeholder={"Subsection Title"} defaultValue={section.title} onChange={(e) => {changeTitle(e)}}/>
-                    <Form.Control placeholder={"MMM YYYY - (MMM YYYY or Current)"}  defaultValue={section.date} size="sm" onChange={(e) => {changeDate(e)}}/>
+                    <Form.Control placeholder={"Subsection Title"} value={section.title} onChange={(e) => {changeTitle(e)}}/>
+                    <Form.Control placeholder={"MMM YYYY - (MMM YYYY or Current)"}  value={section.date} size="sm" onChange={(e) => {changeDate(e)}}/>
                 </InputGroup>
                 <InputGroup direction="horizontal">
                 <Form.Check label="add Subtitle" id="subTitle" className="mx-1" checked={enableSubtitle} onChange={() =>{changeSubtitleState(!enableSubtitle)}}/>
-                {enableSubtitle? <Form.Control placeholder="subtitle" defaultValue={section.subTitle} size="sm" onChange={(e) => {changeSubtitle(e)}}/>: <></>}
+                {enableSubtitle? <Form.Control placeholder="subtitle" value={section.subTitle} size="sm" onChange={(e) => {changeSubtitle(e)}}/>: <></>}
                 </InputGroup>
                 <Stack direction="horizontal">
-                    <Col xs="1"></Col>
                     <Stack direction="vertical">
                     <ListTemplateInput list={section.list} func={updateListBasic} type={Type} enableBulletPoint={true} changeWithIndex={true}/>
                     </Stack>
@@ -94,10 +93,10 @@ export default function BasicTemplateInput(props) {
                 <Row>
                     <InputGroup direction="horizontal">
                         <Form.Check label="add technologies" checked={enableTechnology} id="technology" className="mx-1" onChange={() =>{changeTechnologyState(!enableTechnology)}}/>
-                        {enableTechnology? <Form.Control placeholder="technologies" as="textarea" size="sm" defaultValue={section.technologies ? section.technologies.join(", ") : ""} onChange={(e) => {changeTechnologies(e)}}/>: <></>}
+                        {enableTechnology? <Form.Control placeholder="technologies" as="textarea" size="sm" value={section.technologies ? section.technologies : ""} onChange={(e) => {changeTechnologies(e)}}/>: <></>}
                     </InputGroup>
                 </Row>
-                <div className="my-2"></div>
+
             </Container>
             </Stack>
         </Container>

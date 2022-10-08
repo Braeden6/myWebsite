@@ -30,7 +30,7 @@ export default function BasicTemplate(props) {
             {section.technologies ? <><Col xs="1"></Col>
                 <Col id="technologies">
                     <span id="technologies-title">Technologies: </span>
-                    {section.technologies.join(", ")}
+                    <span>{section.technologies}</span>
                 </Col>
             </>: <></>}
           </Row>

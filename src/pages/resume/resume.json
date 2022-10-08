@@ -2,7 +2,7 @@
     "name": "Braeden Norman",
     "email": "braeden.norman6@gmail.com",
     "phoneNumber": "778-668-9405",
-    "GitHub": "https://github.com/Braeden6",
+    "Github": "https://github.com/Braeden6",
     "LinkedIn": "https://linkedin.com/in/braeden-norman-49665a157",
     "titleFacts": ["Computer Science BSc", "Bilingual","Engineering/Software Engineering Work Experience"],
     "sections": [
@@ -28,7 +28,7 @@
                         "list": ["Made a Sudoku solver app, in which you can use multiple different algorithms to solve sudoku puzzles to test and compare process speed",
                             "Implemented solver with search tree, breadth-first search and depth-first search, and other heuristics to speed up process time",
                             "Created a GUI with pyside6 that displays step-by-step solutions and allows you to solve puzzles yourself"],
-                        "technologies":    [ "Python", "Pyside6", "Pandas", "Numpy", "Github"] 
+                        "technologies":    "Python, Pyside6, Pandas, Numpy, Github" 
 
                     },
                     {
@@ -37,7 +37,7 @@
                         "list": ["Made a game recognition program to detect inputs and determine responses",
                             "Took screen images, converted them to 8-bit black and white, and ran it through a CNN to identify the highest probability of the best response",
                             "Used multiprocessing to complete tasks in parallel"],
-                        "technologies" : ["Python", "Scikit-learn", "GitHub", "PIL", "Pandas", "Multiprocessing"]
+                        "technologies" : "Python, Scikit-learn, GitHub, PIL, Pandas, Multiprocessing"
                     },
                     {
                         "title": "Maze Game",
@@ -46,7 +46,7 @@
                             "Utilized a visual-based system to give maximum view distance (fog of war)",
                             "Created and displayed visuals with a GUI using JFrame utilizing a constant update timer for visual rendering",
                             "Used JUnit for Unit testing to build a more robust bug-free game" ],
-                        "technologies" : ["GitHub", "Java", "JUnit", "IntelliJ", "Swing"]
+                        "technologies" : "GitHub, Java, JUnit, IntelliJ, Swing"
                     }, 
                     {
                         "title": "Map Drawer",
@@ -54,7 +54,7 @@
                         "list": ["Created a display system synced over multiple computers using a Socket and Server",
                         "Displayed a map where a dedicated user could reveal or cover up portions of the map using a drawing tool",
                         "Included Swing GUI that has a tools menu such as changing from drawing and erasing along with selecting draw size "],
-                        "technologies" : ["Java", "Socket", "IntelliJ"]
+                        "technologies" : "Java, Socket, IntelliJ"
                     }
                 ]
         },

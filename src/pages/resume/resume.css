@@ -70,6 +70,8 @@
     font-size: 0.9rem;
 }
 
-#test {
-    background-color: black;
+.dropdown .dropdown__list {
+    position: absolute;
+    top: 50px;
+    left: 0;
 }

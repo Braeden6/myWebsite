@@ -1,12 +1,12 @@
 import "../resume.css"
-import { Button, Stack, Col, Container, ButtonGroup, DropdownButton, Dropdown } from "react-bootstrap";
+import { Button, Stack, Container, ButtonGroup, DropdownButton, Dropdown } from "react-bootstrap";
 
 export default function ListTemplateInput(props) {
   let list = props.list
   let updateList = props.func
   let Type = props.type
   let addListDefault = props.addListDefault
-  let enableBulletPoint = props.enableBulletPoint? true: false
+  let enableAddButton = props.disableAddButton? false : true
   if (list === undefined) return
   if (updateList === undefined) return
 
@@ -29,17 +29,17 @@ export default function ListTemplateInput(props) {
   // TODO: add move up and down button
   function getItem(e,idx) {
     return (
-      <Stack direction="horizontal">
-        {Type({id:idx.toString(), value: e, idx: idx, onChange: changeSubsection})}
-        <Stack direction="horizontal" className="mb-auto">
-        <DropdownButton as={ButtonGroup} title="" variant="primary">
-          <Dropdown.Item as="button">Move Up</Dropdown.Item>
-          <Dropdown.Item as="button">Move Down</Dropdown.Item>
-          <Dropdown.Divider />
-          <Dropdown.Item id={idx} onClick={removeSubsection} as="button">Remove</Dropdown.Item>
-        </DropdownButton>
+        <Stack direction="horizontal">
+          {Type({id:idx.toString(), value: e, idx: idx, onChange: changeSubsection})}
+          <Stack direction="horizontal" className="mb-auto">
+          <DropdownButton as={ButtonGroup} title="" variant="primary">
+            <Dropdown.Item as="button">Move Up</Dropdown.Item>
+            <Dropdown.Item as="button">Move Down</Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item id={idx} onClick={removeSubsection} as="button">Remove</Dropdown.Item>
+          </DropdownButton>
+          </Stack>
         </Stack>
-      </Stack>
     )
   }
 
@@ -48,7 +48,7 @@ export default function ListTemplateInput(props) {
   return (
       <Stack direction="vertical">
         {list.map( (e,idx) => getItem(e,idx))}
-        <Button  onClick={addSubsection} className="mx-auto" size="md">+</Button>
+        {enableAddButton? <Button  onClick={addSubsection} className="mx-auto" size="md">+</Button> : <></>}
       </Stack>
   )
   }

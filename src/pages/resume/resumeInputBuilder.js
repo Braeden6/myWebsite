@@ -1,7 +1,7 @@
 import "./../resume/resume.css"
 import NavBar from "../../components/navBar/navBar";
 import { TemplateMap } from "../resume/resumeTemplates/templateMap";
-import { Form, Stack } from "react-bootstrap";
+import { ButtonGroup, Form, Stack, Button, Container, Col, Accordion, DropdownButton, Dropdown } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import ListTemplateInput from "../resume/resumeTemplates/listTemplateInput";
 import inputResume from "./resume.json";
@@ -16,12 +16,6 @@ export default function ResumeInputBuilder() {
       return ({...prevState, sections : newSections })
     })
   }
-
-
-  useEffect(() => {
-    console.log(sectionSkill.sections[0].list)
-
-  }, [sectionSkill])
 
   function updateTitle(newTitle, idx) {
     changeSectionSkill((prevState) => {
@@ -47,14 +41,43 @@ export default function ResumeInputBuilder() {
     }))
   }
 
+  function changeElement(e, field) {
+      changeSectionSkill((prevState) => {
+        return ({...prevState, [field]: e.target.value})
+      })
+  }
+
+  useEffect( () => {
+    //console.log(sectionSkill.sections[1])
+  }, [sectionSkill])
+
   
 
   return (
     <div id="all">
         <NavBar variant="light"/>
-        <div id="resume">
-          <ListTemplateInput list={sectionSkill.sections} func={updateSections} addListDefault={{ "title":"", "templateType": "BasicTemplate", "list": []}} type={Type}/>
-          <ResumeBuilder resume={inputResume}/>
+        <div id="resume" >
+          <Form.Control placeholder="name@example.com" type="email" value={sectionSkill.name} onChange={(e) => {changeElement(e, "name")}}/>
+          <Form.Control placeholder="Email" value={sectionSkill.email} onChange={(e) => {changeElement(e, "email")}}/>
+          <Form.Control placeholder="Phone Number" value={sectionSkill.phoneNumber} onChange={(e) => {changeElement(e, "phoneNumber")}}/>
+          <Form.Control placeholder="GitHub" value={sectionSkill.Github} onChange={(e) => {changeElement(e, "Github")}}/>
+          <Form.Control placeholder="LinkedIn" value={sectionSkill.LinkedIn} onChange={(e) => {changeElement(e, "LinkedIn")}}/>
+          <Stack className="align-items-center justify-content-center text-center">
+            <ButtonGroup className="py-2">
+              <DropdownButton as={ButtonGroup} title="Add Section" variant="primary" >
+                <Dropdown.Item onClick={() => {updateSections([...sectionSkill.sections, { "title":"", "templateType": "BasicTemplate", "list": []}])}}>Add Basic Template</Dropdown.Item>
+                <Dropdown.Item onClick={() => {updateSections([...sectionSkill.sections, { "title":"", "templateType": "TechSkillTemplate", "list": []}])}}>Add Technical Skill Template</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item>Preview Templates</Dropdown.Item>
+              </DropdownButton>
+              <Button>Save</Button>
+              <Button>Preview</Button>
+            </ButtonGroup>
+          </Stack>
+          <Accordion >
+            <ListTemplateInput list={sectionSkill.sections} func={updateSections} type={Type} disableAddButton/>
+          </Accordion>
+          <ResumeBuilder resume={sectionSkill}/>
         </div>
     </div>
   )
@@ -79,11 +102,16 @@ export default function ResumeInputBuilder() {
     }
 
     return (
-      <> 
-        <Stack direction="vertical" className="border">
-          <Form.Control id="input-section-title" defaultValue={section.sectionTitle} onChange={(e) => {updateTitle(e.target.value, idx)}}/>
-          <ListTemplateInput  list={section.list} func={func} addListDefault={addition} type={Type}/>
+      <Container>
+      <Accordion.Item eventKey={idx}>
+        <Accordion.Header>{section.sectionTitle}</Accordion.Header>
+        <Accordion.Body className="p-0">
+          <Stack direction="vertical">
+            <Form.Control id="input-section-title" value={section.sectionTitle} onChange={(e) => {updateTitle(e.target.value, idx)}}/>
+            <ListTemplateInput  list={section.list} func={func} addListDefault={addition} type={Type}/>
           </Stack>
-      </>
+        </Accordion.Body>
+      </Accordion.Item>
+      </Container>
     )    
   }
