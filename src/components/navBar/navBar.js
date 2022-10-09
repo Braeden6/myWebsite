@@ -26,7 +26,8 @@ export default function NavBar(style) {
                 className="justify-content-end flex-grow-1 pe-3"
             >
                 <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/practice">Practice</Nav.Link>
+                <Nav.Link href="/login">Login</Nav.Link>
+                <Nav.Link href="/map">Map</Nav.Link>
                 <NavDropdown title="Resume" id="basic-nav-dropdown" align="end">
                 <NavDropdown.Item href="/resume">My Resume</NavDropdown.Item>
                 <NavDropdown.Item href="/resumeBuilder">Resume Builder</NavDropdown.Item>
