@@ -8,11 +8,35 @@ body, html {
   top:0;
   min-width: 100%;
   min-height: 100%;
-  background-color: black;
   background-image: url("background.jpg");
   background-size: cover;
 }
 
 #carousel .carousel-indicators{
   display: none;
+}
+
+#carousel {
+  position: absolute;
+  top:10%;
+  left:0;
+  right:0;
+  bottom:0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#item {
+  height: 34rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+#carousel-image {
+  height: 20rem;
+  width: 20rem;
 }

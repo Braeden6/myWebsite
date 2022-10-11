@@ -11,11 +11,11 @@ export default function Main() {
       <>     
       <Container id="mainAll">
         <NavBar variant="dark"/>
-        <Carousel interval={10000} id="carousel" >
+        <Carousel interval={10000} id="carousel">
           <Carousel.Item>
-            <Container id="carousel-item">
-              <Card style={{ width:'24rem'} } bg="white"  text="black" className="text-center mx-auto bg-opacity-75">
-                <Card.Img src={image} style={{bg:'black'}} className="p-4 rounded-circle"/>
+            <Stack id="item">
+              <Card style={{ width:'24rem'} } bg="white"  text="black" className="text-center mx-auto bg-opacity-75" >
+                <Card.Img src={image} style={{bg:'black'}} className="p-4 m-auto rounded-circle" id="carousel-image"/>
                 <Card.Header><h1>Braeden Norman</h1></Card.Header>
                 <Card.Body>
                   <Card.Text className="my-0">
@@ -32,20 +32,23 @@ export default function Main() {
                   </Card.Footer>
                 </Card.Body>
               </Card>
-            </Container>
+            </Stack>
           </Carousel.Item>
-            <Carousel.Item id="carousel-item" className="my-auto">
+            <Carousel.Item>
+            <Stack id="item">
               <Card style={{ width:'24rem'} } bg="white"  text="black" className="mx-auto bg-opacity-75">
                 <Card.Header className="text-center"><h1>This Website</h1></Card.Header>
                 <Card.Body>
-                  <Card.Text >
-                    Front-end: uses React and Bootstrap, and hosted on Azure Web App.
+                  <Card.Text>
+
+                    <strong>Front-end:</strong> Uses React and Bootstrap, and hosted on Azure Web App. For the map route, 
+                    it makes call to free APIs, based on given longitude and latitude, for that location information.
                   </Card.Text>
                   <Card.Text>
-                    Back-end: uses Node.js and CosmosDB, and hosted on Azure Function App.
+                  <strong>Back-end:</strong> uses Node.js and CosmosDB, and hosted on Azure Function App.
                   </Card.Text>
                   <Card.Text>
-                    It is still being worked on and is a work in progress.
+                    This website is still under development and is a running project of mine.
                   </Card.Text>
                   <Card.Footer>
                     <Stack direction="horizontal" gap={3} className="align-items-center justify-content-center">
@@ -57,6 +60,7 @@ export default function Main() {
                   </Card.Footer>
                 </Card.Body>
               </Card>
+              </Stack>
             </Carousel.Item>
           </Carousel>
       </Container>
