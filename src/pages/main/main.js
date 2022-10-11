@@ -1,3 +1,4 @@
+import React from 'react';
 import NavBar from "../../components/navBar/navBar"
 import {AiFillGithub, AiFillLinkedin} from "react-icons/ai"
 import image from './main.jpg'

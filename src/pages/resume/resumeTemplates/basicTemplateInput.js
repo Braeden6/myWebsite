@@ -1,3 +1,4 @@
+import React from 'react';
 import "./../resume.css"
 import { useState, useEffect } from "react"
 import {Container, Row, Col, Stack, Form, InputGroup} from 'react-bootstrap';

@@ -1,5 +1,6 @@
+import React from 'react';
 import "../resume.css"
-import { Button, Stack, Container, ButtonGroup, DropdownButton, Dropdown } from "react-bootstrap";
+import { Button, Stack, ButtonGroup, DropdownButton, Dropdown } from "react-bootstrap";
 
 export default function ListTemplateInput(props) {
   let list = props.list

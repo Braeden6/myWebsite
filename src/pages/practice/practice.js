@@ -1,3 +1,4 @@
+import React from 'react';
 import "./../resume/resume.css"
 import NavBar from "../../components/navBar/navBar";
 

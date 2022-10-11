@@ -3,13 +3,13 @@ import "./resume.css"
 import NavBar from "../../components/navBar/navBar";
 import inputResume from "./resume.json";
 import ResumeBuilder from "./resumeBuilder";
-import { useState, useEffect } from "react";
+// import { useState } from "react";
 import * as ReactDOM from "react-dom/client";
 import  { useNavigate } from 'react-router-dom'
 import {Stack, Button} from 'react-bootstrap';
 
 export default function Resume() {
-  const [data, setData] = useState(null);
+  // const [data, setData] = useState(null);
   let Navigate = useNavigate();
   
   
@@ -35,7 +35,7 @@ export default function Resume() {
       </div>
   )
   }
-
+/*
   function test(){
     fetch(process.env.NODE_ENV === "production"? "https://backend-2015.azurewebsites.net/api/sendHello": "http://localhost:7071/api/HttpTrigger1", {
       method: 'POST',
@@ -45,7 +45,8 @@ export default function Resume() {
     .then((data) => console.log(data.message));
     
 
-  }
+  }*/
+
 
 
 

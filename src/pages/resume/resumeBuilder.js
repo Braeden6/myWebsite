@@ -1,4 +1,4 @@
-
+import React from 'react';
 import "./resume.css"
 import {Tooltip, OverlayTrigger} from 'react-bootstrap';
 import { TemplateMap } from "./resumeTemplates/templateMap";
@@ -21,9 +21,9 @@ export default function ResumeBuilder(input) {
                   <label id="link" onClick={() => navigator.clipboard.writeText(inputResume.email)}>{inputResume.email}</label>
                 </OverlayTrigger>     
                 <span> | {inputResume.phoneNumber} | </span>
-                <a href={inputResume.Github} target="_blank" rel="noreferrer">GitHub</a>
+                <a href={inputResume.Github} target="_blank" rel="noopener noreferrer">GitHub</a>
                 <span> | </span>
-                <a href={inputResume.LinkedIn} target="_blank" rel="noreferrer">Linkedin</a>
+                <a href={inputResume.LinkedIn} target="_blank" rel="noopener noreferrer">Linkedin</a>
                 </div>
                 <div>
                   <label>{inputResume.titleFacts.join(" | ")}</label>

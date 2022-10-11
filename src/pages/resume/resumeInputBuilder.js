@@ -1,7 +1,8 @@
+import React from 'react';
 import "./../resume/resume.css"
 import NavBar from "../../components/navBar/navBar";
 import { TemplateMap } from "../resume/resumeTemplates/templateMap";
-import { ButtonGroup, Form, Stack, Button, Container, Col, Accordion, DropdownButton, Dropdown } from "react-bootstrap";
+import { ButtonGroup, Form, Stack, Button, Container, Accordion, DropdownButton, Dropdown } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import ListTemplateInput from "../resume/resumeTemplates/listTemplateInput";
 import inputResume from "./resume.json";

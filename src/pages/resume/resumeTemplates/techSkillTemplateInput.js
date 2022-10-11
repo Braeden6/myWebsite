@@ -1,5 +1,5 @@
 import "./../resume.css"
-import {Stack, Form, Col, Container} from 'react-bootstrap';
+import {Stack, Form, Container} from 'react-bootstrap';
 import React from "react";
 
 

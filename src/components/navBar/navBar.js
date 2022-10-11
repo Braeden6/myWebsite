@@ -1,3 +1,4 @@
+import React from 'react';
 import './navBar.css'
 import {Container, Nav, Navbar, NavDropdown, Offcanvas} from 'react-bootstrap'
 import { AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";

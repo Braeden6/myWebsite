@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Map, {FullscreenControl} from 'react-map-gl';
-// import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
-import {useEffect, useRef, useState} from 'react'
+import Map from 'react-map-gl';
+//import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
+import {useEffect, useState} from 'react'
 import "./map.css"
 import { Button, Container } from 'react-bootstrap';
 import NavBar from '../components/navBar/navBar';
@@ -59,7 +59,6 @@ export default function SimpleMap() {
         } else {
             console.log("enabled button")
         }
-        
     }, [disableButton])
 
       async function getInformation() {

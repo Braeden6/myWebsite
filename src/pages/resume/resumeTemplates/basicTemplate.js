@@ -1,4 +1,5 @@
 
+import React from 'react';
 import "./../resume.css"
 import {Container, Row, Col, Stack} from 'react-bootstrap';
 
