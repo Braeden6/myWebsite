@@ -1,5 +1,8 @@
 import './navBar.css'
 import {Container, Nav, Navbar, NavDropdown, Offcanvas} from 'react-bootstrap'
+import { AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
+import { SignInButton } from '../SignInButton';
+import { SignOutButton } from '../SignOutButton';
 
 // https://react-bootstrap.github.io/components/navbar/
 export default function NavBar(style) {
@@ -26,7 +29,6 @@ export default function NavBar(style) {
                 className="justify-content-end flex-grow-1 pe-3"
             >
                 <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/login">Login</Nav.Link>
                 <Nav.Link href="/map">Map</Nav.Link>
                 <NavDropdown title="Resume" id="basic-nav-dropdown" align="end">
                 <NavDropdown.Item href="/resume">My Resume</NavDropdown.Item>
@@ -36,6 +38,13 @@ export default function NavBar(style) {
                     Something else here
                 </NavDropdown.Item>
                 </NavDropdown>
+                <UnauthenticatedTemplate>
+                  <SignInButton/>
+                </UnauthenticatedTemplate>
+                <AuthenticatedTemplate>
+                  <Nav.Link>Welcome ... </Nav.Link>
+                  <SignOutButton/>
+                </AuthenticatedTemplate>
             </Nav>
             </Offcanvas.Body>
             </Navbar.Offcanvas>

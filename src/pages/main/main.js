@@ -1,9 +1,8 @@
 import NavBar from "../../components/navBar/navBar"
 import {AiFillGithub, AiFillLinkedin} from "react-icons/ai"
-
 import image from './main.jpg'
 import './main.css'
-import { Stack, Image, Container, Card, Button, Carousel } from "react-bootstrap";
+import { Stack, Container, Card, Button, Carousel } from "react-bootstrap";
 
 //<Image src={main} id="mainImage"/> 
 export default function Main() {
@@ -11,8 +10,9 @@ export default function Main() {
       <>     
       <Container id="mainAll">
         <NavBar variant="dark"/>
-        <Carousel>
-          <Carousel.Item interval={10000}>
+        <Carousel interval={10000} id="carousel" >
+          <Carousel.Item>
+            <Container id="carousel-item">
               <Card style={{ width:'24rem'} } bg="white"  text="black" className="text-center mx-auto bg-opacity-75">
                 <Card.Img src={image} style={{bg:'black'}} className="p-4 rounded-circle"/>
                 <Card.Header><h1>Braeden Norman</h1></Card.Header>
@@ -31,8 +31,9 @@ export default function Main() {
                   </Card.Footer>
                 </Card.Body>
               </Card>
-            </Carousel.Item>
-            <Carousel.Item interval={10000}>
+            </Container>
+          </Carousel.Item>
+            <Carousel.Item id="carousel-item" className="my-auto">
               <Card style={{ width:'24rem'} } bg="white"  text="black" className="mx-auto bg-opacity-75">
                 <Card.Header className="text-center"><h1>This Website</h1></Card.Header>
                 <Card.Body>
