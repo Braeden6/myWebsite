@@ -1,60 +1,91 @@
-import React from 'react';
-import "./resume.css"
-import {Tooltip, OverlayTrigger} from 'react-bootstrap';
-import { TemplateMap } from "./resumeTemplates/templateMap";
+import ResumeEditor from "./resumeEditor";
+import NavBar from "../../components/navBar/navBar";
+import GetResumeList from "../../helpers/getResumeList";
+import { useMsal } from "@azure/msal-react";
+import { Button, Dropdown, Form, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import myResume from "./resume.json";
+import GetResume from "../../helpers/getResume";
+import SaveResume from "../../helpers/saveResume";
+
+function setLoadDropdownList(instance, accounts, setResumeList) {
+    GetResumeList(instance, accounts)
+        .then((list) => setResumeList(list));
+}
 
 
+export default function ResumeBuilder() {
+    const [ resumeList, setResumeList ] = useState(null);
+    const [ resume, setResume ] = useState(null);
+    const [ saveName, setSaveName ] = useState("");
 
-export default function ResumeBuilder(input) {
-    let inputResume = input.resume
-    return (
-          <div id="resume">
-            <h1 id ="name">{inputResume.name}</h1>
-            <div id="below-title">
-              <div>
-                <OverlayTrigger
-                  key="top"
-                  placement="top"
-                  overlay={
-                    <Tooltip ><strong>Click</strong> to Copy.</Tooltip>
-                  }>
-                  <label id="link" onClick={() => navigator.clipboard.writeText(inputResume.email)}>{inputResume.email}</label>
-                </OverlayTrigger>     
-                <span> | {inputResume.phoneNumber} | </span>
-                <a href={inputResume.Github} target="_blank" rel="noopener noreferrer">GitHub</a>
-                <span> | </span>
-                <a href={inputResume.LinkedIn} target="_blank" rel="noopener noreferrer">Linkedin</a>
-                </div>
-                <div>
-                  <label>{inputResume.titleFacts.join(" | ")}</label>
-                </div>
-              </div>
-                {getAllSections(inputResume.sections)}
-            </div>
-    )
+    const { instance, accounts } = useMsal();
+
+    useEffect(() => {
+        setLoadDropdownList(instance,accounts,setResumeList);
+    }, [accounts])
+
+    function getResume(saveName) {
+       GetResume(instance, accounts, saveName)
+       .then((resume) => {
+        setSaveName(saveName)
+        setResume(resume)
+       })
     }
 
+    function getResumeDropdown() {
+        if (resumeList != null && resumeList.length > 0) {
+            return (
+                <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    Load Saved Resume
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                    {resumeList.map( (e,idx) => <Dropdown.Item key={e} onClick={() => {getResume(e)}}>{e}</Dropdown.Item>)}
+                </Dropdown.Menu>
+                </Dropdown>
+            )
+        } else {
+            return(
+                // TODO: fix tooltip placement
+                <OverlayTrigger delay={{ show: 250, hide: 0 }}overlay={
+                    <Tooltip id="button-tooltip">
+                        No Saved Resume
+                    </Tooltip>
+                }>
+                    <Dropdown>
+                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                            Load Saved Resumes
+                        </Dropdown.Toggle>
+                    </Dropdown>
+                </OverlayTrigger>)
+        }
+        
 
-    
-  function getAllSections(sections) {
-    return (
-      <>
-      {sections.map( (e,idx) => getSection(e,idx))}
-      </>
-    )
-  }
+    }
 
+    // save resume with name and update list of 
+    function saveResume() {
+        SaveResume(instance, accounts, myResume, saveName)
+        .then(setLoadDropdownList(instance,accounts,setResumeList));
+    }
 
-  function getSection(section,idx) {
-    // eval calls saved template function name from json file
-    return (
-        <>
-          <h2 id="technical">{section.sectionTitle}</h2>
-          <hr></hr>
-          {section.list.map( (e,idx) => {
-            const Tag = TemplateMap[section.templateType] 
-            return (<Tag section={e}/>)
-          })}
-        </>
-    )
-  }
+   // <ResumeEditor/>
+    return ( 
+        <div id="all">
+            <NavBar variant="light"/>
+            <Stack direction="vertical">
+                <Form.Control value={saveName} onChange={(e) => {setSaveName(e.target.value)}}></Form.Control>
+                <Stack direction="horizontal">
+                    {getResumeDropdown()}
+                    <Button onClick={saveResume}>Save Resume</Button>
+                </Stack>
+
+            </Stack>
+            
+            
+            <div id="resume"/>
+            {!resume? <></>: <ResumeEditor inputResume={resume}/>}
+        </div>
+    );
+}

@@ -41,11 +41,11 @@ export default function Main() {
                 <Card.Body>
                   <Card.Text>
 
-                    <strong>Front-end:</strong> Uses React and Bootstrap, and hosted on Azure Web App. For the map route, 
-                    it makes call to free APIs, based on given longitude and latitude, for that location information.
+                    <strong>Front-end:</strong> Uses React and Bootstrap, and hosted on Azure Web App. For the map, 
+                    it makes call to free APIs, based on given longitude and latitude, and gets information for the location.
                   </Card.Text>
                   <Card.Text>
-                  <strong>Back-end:</strong> uses Node.js and CosmosDB, and hosted on Azure Function App.
+                  <strong>Back-end:</strong> Uses Node.js and CosmosDB, and hosted on Azure Function App.
                   </Card.Text>
                   <Card.Text>
                     This website is still under development and is a running project of mine.
