@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "api",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -11,6 +11,12 @@
     "nodemon": "^2.0.20"
   },
   "dependencies": {
-    "@react-pdf/renderer": "^3.0.0"
+    "@azure/cosmos": "^3.17.1",
+    "@azure/msal-browser": "^2.30.0",
+    "@azure/msal-node": "^1.14.2",
+    "@react-pdf/renderer": "^3.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "jwk-to-pem": "^2.0.5",
+    "node-fetch": "^3.2.10"
   }
 }
