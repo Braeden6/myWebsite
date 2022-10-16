@@ -39,7 +39,7 @@ export default function resumeViewer(input) {
   function getAllSections(sections) {
     return (
       <>
-      {sections.map( (e,idx) => getSection(e,idx))}
+        {sections.map( (e,idx) => getSection(e,idx))}
       </>
     )
   }

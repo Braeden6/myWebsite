@@ -3,48 +3,35 @@ import "./resume.css"
 import NavBar from "../../components/navBar/navBar";
 import inputResume from "./resume.json";
 import ResumeViewer from "./resumeViewer";
-// import { useState } from "react";
 import * as ReactDOM from "react-dom/client";
 import  { useNavigate } from 'react-router-dom'
 import {Stack, Button} from 'react-bootstrap';
 
 export default function MyResume() {
-  // const [data, setData] = useState(null);
   let Navigate = useNavigate();
-  
   
   async function printPDF() {
     const root = ReactDOM.createRoot(document.getElementById('root'));
-    await root.render(<React.StrictMode><ResumeViewer resume={inputResume}/></React.StrictMode>)
+    await root.render(<React.StrictMode>
+                        <ResumeViewer resume={inputResume}/>
+                      </React.StrictMode>)
     await window.print()
     Navigate("/myResume");
     window.parent.location = window.parent.location.href;
   }
   
   return (
-      <div id="all">
-        <NavBar variant="light"/>
-        <Stack className='col-md-1 mx-auto'>
-          <Button  variant='primary' onClick={ () => {
-            printPDF();
-              }}>Print to Pdf</Button>
-        </Stack>
-        <ResumeViewer resume={inputResume}/>
-      </div>
+    <div id="all">
+      <NavBar variant="light"/>
+      <Stack className='mx-4 align-items-center justify-content-center text-center'>
+        <Button  variant='primary' onClick={ () => {
+          printPDF();
+            }}>Print Resume</Button>
+      </Stack>
+      <ResumeViewer resume={inputResume}/>
+    </div>
   )
-  }
-/*
-  function test(){
-    fetch(process.env.NODE_ENV === "production"? "https://backend-2015.azurewebsites.net/api/sendHello": "http://localhost:7071/api/HttpTrigger1", {
-      method: 'POST',
-      body: JSON.stringify({name: "Test", html: <ResumeBuilder resume={inputResume}/>})
-    })
-    .then((res) => res.json())
-    .then((data) => console.log(data.message));
-    
-
-  }*/
-
+}
 
 
 

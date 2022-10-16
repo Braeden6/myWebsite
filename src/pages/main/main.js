@@ -40,7 +40,6 @@ export default function Main() {
                 <Card.Header className="text-center"><h1>This Website</h1></Card.Header>
                 <Card.Body>
                   <Card.Text>
-
                     <strong>Front-end:</strong> Uses React and Bootstrap, and hosted on Azure Web App. For the map, 
                     it makes call to free APIs, based on given longitude and latitude, and gets information for the location.
                   </Card.Text>

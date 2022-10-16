@@ -10,7 +10,8 @@ export default async function GetResume(instance, accounts, saveName ) {
   const parameters = {
     email: accounts[0].username,
     token: token.idToken,
-    saveName: saveName
+    saveName: saveName,
+    code: process.env.REACT_APP_GET_RESUME
   }
 
     let resume = await fetch((process.env.NODE_ENV === "production"? process.env.REACT_APP_PRODUCTION_URL: process.env.REACT_APP_DEV_URL) + "getResume?" + new URLSearchParams(parameters).toString(), {

@@ -1,6 +1,7 @@
 import React from 'react';
 import "../resume.css"
-import { Button, Stack, ButtonGroup, DropdownButton, Dropdown } from "react-bootstrap";
+import { Button, Stack, ButtonGroup, Dropdown } from "react-bootstrap";
+import { BsFillArrowDownSquareFill, BsFillArrowUpSquareFill, BsFillPlusSquareFill } from "react-icons/bs"
 
 export default function ListTemplateInput(props) {
   let list = props.list
@@ -26,30 +27,52 @@ export default function ListTemplateInput(props) {
     list.splice(parseInt(e.target.id), 1)
     updateList(list)
   }
+
+  function moveUp(idx) {
+    if (idx !== 0) {
+      const cup = list[idx-1]
+      list[idx-1] = list[idx]
+      list[idx] = cup
+      updateList(list)
+    }
+  }
+
+  function moveDown(idx) {
+    if (idx !== list.length - 1) {
+      const cup = list[idx+1]
+      list[idx+1] = list[idx]
+      list[idx] = cup
+      updateList(list)
+    }
+  }
  
   // TODO: add move up and down button
   function getItem(e,idx) {
     return (
-        <Stack direction="horizontal">
-          {Type({id:idx.toString(), value: e, idx: idx, onChange: changeSubsection})}
-          <Stack direction="horizontal" className="mb-auto">
-          <DropdownButton as={ButtonGroup} title="" variant="primary">
-            <Dropdown.Item as="button">Move Up</Dropdown.Item>
-            <Dropdown.Item as="button">Move Down</Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Item id={idx} onClick={removeSubsection} as="button">Remove</Dropdown.Item>
-          </DropdownButton>
-          </Stack>
+      <Stack direction="horizontal">
+        {Type({id:idx.toString(), value: e, idx: idx, onChange: changeSubsection})}
+        <Stack direction="horizontal" className="mb-auto">
+        <Dropdown  as={ButtonGroup} variant="primary" id="list-drop-down">
+          <Dropdown.Toggle/>
+          <Dropdown.Menu flip className="m-0 p-0 align-items-center justify-content-center text-center">
+              <ButtonGroup>
+                <Button variant="primary-outline" size='lg' onClick={() => {moveUp(idx)}}><BsFillArrowUpSquareFill/></Button>
+                <Button variant="primary-outline" size='lg' onClick={() => {moveDown(idx)}}><BsFillArrowDownSquareFill/></Button>
+              </ButtonGroup>
+              <Dropdown.Item id="list-template-remove" onClick={removeSubsection} as="button" >Remove</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
         </Stack>
+      </Stack>
     )
   }
 
 
 
   return (
-      <Stack direction="vertical">
-        {list.map( (e,idx) => getItem(e,idx))}
-        {enableAddButton? <Button  onClick={addSubsection} className="mx-auto" size="md">+</Button> : <></>}
-      </Stack>
+    <Stack direction="vertical">
+      {list.map( (e,idx) => getItem(e,idx))}
+      {enableAddButton? <Button  onClick={addSubsection} className="mx-auto" size="lg" variant='primary-outline'><BsFillPlusSquareFill/></Button> : <></>}
+    </Stack>
   )
   }

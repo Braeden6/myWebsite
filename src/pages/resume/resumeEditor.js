@@ -1,27 +1,15 @@
 import React from 'react';
 import "./../resume/resume.css"
-import NavBar from "../../components/navBar/navBar";
 import { TemplateMap } from "./resumeTemplates/templateMap";
-import { ButtonGroup, Form, Stack, Button, Container, Accordion, DropdownButton, Dropdown } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { ButtonGroup, Form, Stack, Container, Accordion, DropdownButton, Dropdown } from "react-bootstrap";
 import ListTemplateInput from "./resumeTemplates/listTemplateInput";
-import myResume from "./resume.json";
 import ResumeViewer from "./resumeViewer";
-import SaveResume from '../../helpers/saveResume';
-
-import { useMsal } from "@azure/msal-react";
-import { loginRequest } from "../../configFiles/authConfig";
 
 export default function ResumeEditor(props) {
-  const { instance, accounts } = useMsal();
-  let inputResume = myResume;
-  if (props.inputResume !== undefined) {
-    inputResume = props.inputResume;
-  }
-  const [sectionSkill, changeSectionSkill] = useState(inputResume);
-
+  let resume = props.resume;
+  let setResume = props.setResume;
   function updateList(newList, idx) {
-    changeSectionSkill((prevState) => {
+    setResume((prevState) => {
       var newSections = prevState.sections
       newSections[idx].list = newList
       return ({...prevState, sections : newSections })
@@ -29,7 +17,7 @@ export default function ResumeEditor(props) {
   }
 
   function updateTitle(newTitle, idx) {
-    changeSectionSkill((prevState) => {
+    setResume((prevState) => {
       var newSections = prevState.sections
       newSections[idx].sectionTitle = newTitle
       return ({...prevState, sections: newSections })
@@ -37,7 +25,7 @@ export default function ResumeEditor(props) {
   }
 
   function updateSections(newSections) {
-    changeSectionSkill((prevState) => {
+    setResume((prevState) => {
       return ({...prevState, sections: newSections })
     })
   }
@@ -52,32 +40,32 @@ export default function ResumeEditor(props) {
   }
 
   function changeElement(e, field) {
-      changeSectionSkill((prevState) => {
+      setResume((prevState) => {
         return ({...prevState, [field]: e.target.value})
       })
   }
 
   return (
         <div id="resume" >
-          <Form.Control placeholder="name@example.com" type="email" value={sectionSkill.name} onChange={(e) => {changeElement(e, "name")}}/>
-          <Form.Control placeholder="Email" value={sectionSkill.email} onChange={(e) => {changeElement(e, "email")}}/>
-          <Form.Control placeholder="Phone Number" value={sectionSkill.phoneNumber} onChange={(e) => {changeElement(e, "phoneNumber")}}/>
-          <Form.Control placeholder="GitHub" value={sectionSkill.Github} onChange={(e) => {changeElement(e, "Github")}}/>
-          <Form.Control placeholder="LinkedIn" value={sectionSkill.LinkedIn} onChange={(e) => {changeElement(e, "LinkedIn")}}/>
+          <Form.Control placeholder="name@example.com" type="email" value={resume.name} onChange={(e) => {changeElement(e, "name")}}/>
+          <Form.Control placeholder="Email" value={resume.email} onChange={(e) => {changeElement(e, "email")}}/>
+          <Form.Control placeholder="Phone Number" value={resume.phoneNumber} onChange={(e) => {changeElement(e, "phoneNumber")}}/>
+          <Form.Control placeholder="GitHub" value={resume.Github} onChange={(e) => {changeElement(e, "Github")}}/>
+          <Form.Control placeholder="LinkedIn" value={resume.LinkedIn} onChange={(e) => {changeElement(e, "LinkedIn")}}/>
           <Stack className="align-items-center justify-content-center text-center">
             <ButtonGroup className="py-2">
               <DropdownButton as={ButtonGroup} title="Add Section" variant="primary" >
-                <Dropdown.Item onClick={() => {updateSections([...sectionSkill.sections, { "title":"", "templateType": "BasicTemplate", "list": []}])}}>Add Basic Template</Dropdown.Item>
-                <Dropdown.Item onClick={() => {updateSections([...sectionSkill.sections, { "title":"", "templateType": "TechSkillTemplate", "list": []}])}}>Add Technical Skill Template</Dropdown.Item>
+                <Dropdown.Item onClick={() => {updateSections([...resume.sections, { "title":"", "templateType": "BasicTemplate", "list": []}])}}>Add Basic Template</Dropdown.Item>
+                <Dropdown.Item onClick={() => {updateSections([...resume.sections, { "title":"", "templateType": "TechSkillTemplate", "list": []}])}}>Add Technical Skill Template</Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item>Preview Templates</Dropdown.Item>
               </DropdownButton>
             </ButtonGroup>
           </Stack>
           <Accordion >
-            <ListTemplateInput list={sectionSkill.sections} func={updateSections} type={Type} disableAddButton/>
+            <ListTemplateInput list={resume.sections} func={updateSections} type={Type} disableAddButton/>
           </Accordion>
-          <ResumeViewer resume={sectionSkill}/>
+          <ResumeViewer resume={resume}/>
         </div>
   )
   
