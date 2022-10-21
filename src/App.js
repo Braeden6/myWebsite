@@ -2,19 +2,21 @@ import React from "react";
 import './App.css';
 import Main from './pages/main/main';
 import { Route, Routes} from 'react-router-dom';
-import Resume from './pages/resume/resume';
+import MyResume from "./pages/resume/myResume";
 import Practice from './pages/practice/practice';
+import ResumeBuilder from "./pages/resume/resumeBuilder";
+import SimpleMap from "./pages/map/maps";
 
 function App() {
-  return (
+    return (
     <>
-      <div className="container"> 
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/resume" element={<Resume />} />
+          <Route path="/myResume" element={<MyResume />} />
           <Route path="/practice" element={<Practice/>}/>
-        </Routes>
-      </div>
+          <Route path="/resumeBuilder" element={<ResumeBuilder/>}/>
+          <Route path="/map" element={<SimpleMap/>}/>
+        </Routes>        
     </>
   );
 }

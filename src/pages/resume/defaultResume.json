@@ -1,0 +1,60 @@
+{
+    "name": "Bob Smith",
+    "email": "bob.smith@example.com",
+    "phoneNumber": "778-444-4444",
+    "Github": "https://github.com/#bobsmith",
+    "LinkedIn": "https://linkedin.com/in/#bobsmith",
+    "titleFacts": ["Arts Degree", "An Awesome Person","Some Cool Fact"],
+    "sections": [
+        {
+            "sectionTitle": "Technical Skills",
+            "templateType": "TechSkillTemplate",
+            "list": [
+                { 
+                    "title" : "Art Interests",
+                    "descriptor": "Painting, Writing, Drawing, Pottery"
+                },{
+                    "title" : "Technologies",
+                    "descriptor": "PhotoShop, Microsoft Word, ...."
+                }]
+        },
+        {
+            "sectionTitle": "Personal Projects",
+            "templateType": "BasicTemplate",
+            "list": [
+                    {
+                        "title": "Wrote a Book",
+                        "date": "Aug 1999 - Jan 2003",
+                        "list": ["Wrote a book with awesome graphics",
+                                "Interviewed and spoke with publishers"]
+
+                    }
+                ]
+        },
+        {
+            "sectionTitle": "Work Experience",
+            "templateType": "BasicTemplate",
+            "list": [
+                    {
+                        "title": "A Job", 
+                        "subTitle": "A Company",
+                        "date": "May 1992 - Aug 1999",
+                        "list": ["Did really cool stuff",
+                                "Worked on awesome projects"]
+                    }
+            ]
+        },
+        {
+            "sectionTitle": "Education",
+            "templateType": "BasicTemplate",
+            "list": [
+                {
+                    "title": "A Cool University",
+                    "subTitle": "Arts Degree",
+                    "date": "Sep 1988 - Apr 1992",
+                    "list": []
+                }
+            ]
+        }
+    ]
+}

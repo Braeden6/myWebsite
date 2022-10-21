@@ -1,12 +1,10 @@
-.container ul{
-    margin-bottom: 0;
-}
 
-#all {
+#all, html {
     background-color: white;
 }
 
 #resume {
+    background-color: white;
     padding-left: 2rem;
     padding-right: 2rem;
     align-self: center;
@@ -31,7 +29,7 @@
     margin-bottom: 0;
 }
 
-#technical-line {
+.container hr {
     height:2px;
     background-color: black;
 }
@@ -63,6 +61,22 @@
     font-size: 1.2rem;
 }
 
+#input-section-title{
+    font-weight: 650;
+    font-size: 1.2rem;
+}
+
 #template-small{
     font-size: 0.9rem;
+}
+
+
+#resume-title {
+    font-size: 1.5rem;
+    font-weight: 650;
+}
+
+#list-template-remove {
+    font-weight: 650;
+    font-size: 1.2rem;
 }
