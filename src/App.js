@@ -1,11 +1,10 @@
 import React from "react";
-import './App.css';
-import Main from './pages/main/main';
+import Main from './pages/main';
 import { Route, Routes} from 'react-router-dom';
-import MyResume from "./pages/resume/myResume";
-import Practice from './pages/practice/practice';
-import ResumeBuilder from "./pages/resume/resumeBuilder";
-import SimpleMap from "./pages/map/maps";
+import MyResume from "./pages/myResume";
+import Practice from './pages/practice';
+import ResumeBuilder from "./pages/resumeBuilder";
+import SimpleMap from "./pages/maps";
 
 function App() {
     return (

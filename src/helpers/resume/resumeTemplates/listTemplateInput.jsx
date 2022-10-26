@@ -1,5 +1,5 @@
 import React from 'react';
-import "../resume.css"
+import '../../../CSS/resume.css'
 import { Button, Stack, ButtonGroup, Dropdown } from "react-bootstrap";
 import { BsFillArrowDownSquareFill, BsFillArrowUpSquareFill, BsFillPlusSquareFill } from "react-icons/bs"
 

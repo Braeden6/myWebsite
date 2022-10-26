@@ -1,5 +1,5 @@
 import React from 'react';
-import "./resume.css"
+import '../../CSS/resume.css'
 import {Tooltip, OverlayTrigger} from 'react-bootstrap';
 import { TemplateMap } from "./resumeTemplates/templateMap";
 

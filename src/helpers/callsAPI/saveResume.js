@@ -1,5 +1,7 @@
 
-
+// EFFECT: Makes call API saveResume. Saves given resume to saveName in database
+// REQUIRES: instance and accounts from useMsal from "@azure/msal-react", Object/JSON formatted like resume.json
+// MODIFIES: none of the input
 export default async function SaveResume(instance, accounts, resume, saveName) { 
     const accessTokenRequest = {
         scopes: ["user.read"],

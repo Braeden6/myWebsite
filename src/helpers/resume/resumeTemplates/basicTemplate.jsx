@@ -1,6 +1,6 @@
 
 import React from 'react';
-import "./../resume.css"
+import '../../../CSS/resume.css'
 import {Container, Row, Col, Stack} from 'react-bootstrap';
 
 

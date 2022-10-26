@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react';
-import './navBar.css'
+import "../CSS/navBar.css";
 import {Container, Nav, Navbar, NavDropdown, Offcanvas} from 'react-bootstrap'
 import { AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
-import { SignInButton } from '../SignInButton';
-import { SignOutButton } from '../SignOutButton';
+import { SignInButton } from './SignInButton';
+import { SignOutButton } from './SignOutButton';
 import { useMsal } from "@azure/msal-react";
-import CreateAccount from "../../helpers/createAccount"
+import CreateAccount from "../helpers/callsAPI/createAccount";
 
 // https://react-bootstrap.github.io/components/navbar/
 export default function NavBar(style) {
@@ -16,7 +16,7 @@ export default function NavBar(style) {
     if (accounts.length > 0) {
       CreateAccount(instance, accounts);
     }
-  }, [accounts]);
+  }, [accounts, instance]);
 
   return (
     <>
