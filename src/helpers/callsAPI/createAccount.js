@@ -1,4 +1,7 @@
-// creates account if not already in database
+
+// EFFECT: Makes call API addUser. Creates account if not already in database
+// REQUIRES: instance and accounts from useMsal from "@azure/msal-react"
+// MODIFIES: none of the inputs
 export default async function CreateAccount(instance, accounts) { 
   const accessTokenRequest = {
     scopes: ["user.read"],
@@ -6,6 +9,7 @@ export default async function CreateAccount(instance, accounts) {
   };
   let token = await instance.acquireTokenSilent(accessTokenRequest);
 
+  // API inputs
   const parameters = {
     name: accounts[0].name, 
     email: accounts[0].username, 

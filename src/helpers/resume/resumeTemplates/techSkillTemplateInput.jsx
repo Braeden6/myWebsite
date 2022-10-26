@@ -1,4 +1,4 @@
-import "./../resume.css"
+import '../../../CSS/resume.css'
 import {Stack, Form, Container} from 'react-bootstrap';
 import React from "react";
 

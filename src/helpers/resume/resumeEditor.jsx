@@ -1,5 +1,5 @@
 import React from 'react';
-import "./../resume/resume.css"
+import "../../CSS/resume.css"
 import { TemplateMap } from "./resumeTemplates/templateMap";
 import { ButtonGroup, Form, Stack, Container, Accordion, DropdownButton, Dropdown } from "react-bootstrap";
 import ListTemplateInput from "./resumeTemplates/listTemplateInput";
@@ -58,7 +58,7 @@ export default function ResumeEditor(props) {
                 <Dropdown.Item onClick={() => {updateSections([...resume.sections, { "title":"", "templateType": "BasicTemplate", "list": []}])}}>Add Basic Template</Dropdown.Item>
                 <Dropdown.Item onClick={() => {updateSections([...resume.sections, { "title":"", "templateType": "TechSkillTemplate", "list": []}])}}>Add Technical Skill Template</Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Item>Preview Templates</Dropdown.Item>
+                <Dropdown.Item disabled>Preview Templates</Dropdown.Item>
               </DropdownButton>
             </ButtonGroup>
           </Stack>

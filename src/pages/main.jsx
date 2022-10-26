@@ -1,8 +1,8 @@
 import React from 'react';
-import NavBar from "../../components/navBar/navBar"
+import NavBar from "../components/navBar"
 import {AiFillGithub, AiFillLinkedin} from "react-icons/ai"
-import image from './main.jpg'
-import './main.css'
+import image from '../images/main-selfie.jpg'
+import '../CSS/main.css'
 import { Stack, Container, Card, Button, Carousel } from "react-bootstrap";
 
 //<Image src={main} id="mainImage"/> 

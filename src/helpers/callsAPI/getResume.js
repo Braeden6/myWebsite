@@ -1,4 +1,8 @@
 
+// EFFECT: Makes call API getResume. Returns resume saveName if authenticated and found
+// REQUIRES: instance and accounts from useMsal from "@azure/msal-react", and saveName is a string
+// MODIFIES: none of the input
+// RETURNS: Resumes in Object/JSON format redefined
 export default async function GetResume(instance, accounts, saveName ) { 
   const accessTokenRequest = {
     scopes: ["user.read"],

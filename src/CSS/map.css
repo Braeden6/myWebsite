@@ -1,11 +1,8 @@
-
 #all-map {
     width: 100vw;
     height: 100vh;
     background-color: black;
 }
-
-
 
 #side-bar {
     background-color: rgba(35, 55, 75, 0.9);
@@ -28,7 +25,6 @@
     border-radius: 4px;
 
 }
-
 
 #map-wrapper {
     position: fixed;

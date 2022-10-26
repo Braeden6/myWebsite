@@ -1,5 +1,5 @@
 import React from 'react';
-import "./../resume.css"
+import '../../../CSS/resume.css'
 import { useState, useEffect } from "react"
 import {Container, Row, Col, Stack, Form, InputGroup} from 'react-bootstrap';
 import ListTemplateInput from "./listTemplateInput";

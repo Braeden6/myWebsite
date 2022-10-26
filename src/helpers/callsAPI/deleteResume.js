@@ -1,5 +1,7 @@
 
-
+// EFFECT: Makes call API deleteResume. Removes resume from database if deleteName is found
+// REQUIRES: instance and accounts from useMsal from "@azure/msal-react", and deleteName is a string
+// MODIFIES: none of the input
 export default async function DeleteResume(instance, accounts, deleteName) { 
     const accessTokenRequest = {
         scopes: ["user.read"],

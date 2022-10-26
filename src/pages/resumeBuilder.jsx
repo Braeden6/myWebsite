@@ -1,13 +1,13 @@
-import ResumeEditor from "./resumeEditor";
-import NavBar from "../../components/navBar/navBar";
-import GetResumeList from "../../helpers/getResumeList";
+import ResumeEditor from "../helpers/resume/resumeEditor";
+import NavBar from "../components/navBar";
 import { useMsal } from "@azure/msal-react";
 import { Button, Dropdown, Form, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import GetResume from "../../helpers/getResume";
-import SaveResume from "../../helpers/saveResume";
-import DeleteResume from "../../helpers/deleteResume";
-import defaultResume from "./defaultResume.json";
+import GetResumeList from "../helpers/callsAPI/getResumeList";
+import GetResume from "../helpers/callsAPI/getResume";
+import SaveResume from "../helpers/callsAPI/saveResume";
+import DeleteResume from "../helpers/callsAPI/deleteResume";
+import defaultResume from "../helpers/resume/defaultResume.json";
 
 import { AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
 
@@ -26,7 +26,7 @@ export default function ResumeBuilder() {
 
     useEffect(() => {
         updateResumeList(instance,accounts,setResumeList);
-    }, [accounts])
+    }, [accounts, instance])
 
     function getResume(saveName) {
        GetResume(instance, accounts, saveName)
@@ -53,17 +53,17 @@ export default function ResumeBuilder() {
         }
     }
 
-    function getResumeDropdown(func, name) {
+    // get dropdown menu of currently saved resumes in database
+    function getResumeDropdown(buttonCallback, dropdownName) {
         const hasAResumeList = resumeList != null && resumeList.length > 0
-
         const dropdown = 
             <Dropdown>
                 <Dropdown.Toggle id="dropdown-basic">
-                    {name}
+                    {dropdownName}
                 </Dropdown.Toggle>
                 {hasAResumeList? 
                     <Dropdown.Menu>
-                        {resumeList.map( (e,idx) => <Dropdown.Item key={e} onClick={() => {func(e)}}>{e}</Dropdown.Item>)} 
+                        {resumeList.map( (e,idx) => <Dropdown.Item key={e} onClick={() => {buttonCallback(e)}}>{e}</Dropdown.Item>)} 
                     </Dropdown.Menu>
                     : <></>}
             </Dropdown>

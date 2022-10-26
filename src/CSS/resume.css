@@ -1,6 +1,7 @@
 
 #all, html {
     background-color: white;
+    min-height: 100vw;
 }
 
 #resume {
