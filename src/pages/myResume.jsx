@@ -38,12 +38,15 @@ useEffect(() => {
   return (
     <div id="all">
       <NavBar variant="light"/>
-      <Stack className='mx-4 align-items-center justify-content-center text-center'>
-        <Button  variant='primary' onClick={ () => {
-          printPDF();
-            }} disabled={resume===null}>Print Resume</Button>
-      </Stack>
-      {resume? <ResumeViewer resume={resume}/> : <></>}
+      <div id="myResume">
+        <Stack className='mx-4 align-items-center justify-content-center text-center' >
+          <Button  variant='primary' onClick={ () => {
+            printPDF();
+              }} disabled={resume===null}>Print Resume</Button>
+        </Stack>
+        {resume? <ResumeViewer resume={resume}/> : <></>}
+      </div>
+      
     </div>
   )
 }

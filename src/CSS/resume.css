@@ -1,6 +1,9 @@
 
 #all, html {
     background-color: white;
+}
+
+#myResume {
     min-height: 100vw;
 }
 
