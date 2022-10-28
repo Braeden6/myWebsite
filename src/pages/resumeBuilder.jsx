@@ -1,3 +1,13 @@
+/*
+ 
+  Braeden's Personal Website
+  Author: Braeden Norman
+  Date: 2022-10-27
+
+  Helpful Information
+
+  Authentication Template Msal: https://learn.microsoft.com/en-us/azure/active-directory/develop/tutorial-v2-react
+ */
 import ResumeEditor from "../helpers/resume/resumeEditor";
 import NavBar from "../components/navBar";
 import { useMsal } from "@azure/msal-react";

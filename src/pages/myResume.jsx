@@ -1,3 +1,13 @@
+/*
+ 
+  Braeden's Personal Website
+  Author: Braeden Norman
+  Date: 2022-10-27
+
+  Helpful Information
+
+  Print Window JavaScript: https://developer.mozilla.org/en-US/docs/Web/API/Window/print
+ */
 import React, {useState, useEffect} from 'react';
 import "../CSS/resume.css";
 import NavBar from "../components/navBar";

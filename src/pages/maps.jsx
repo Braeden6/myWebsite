@@ -1,3 +1,17 @@
+/*
+ 
+  Braeden's Personal Website
+  Author: Braeden Norman
+  Date: 2022-10-27
+
+  Helpful Information
+
+  react-map-gl setup: https://visgl.github.io/react-map-gl/docs/get-started/get-started
+  GeoJSON/react-map-gl/Source: https://github.com/visgl/react-map-gl/tree/7.0-release/examples/geojson
+
+  7timer API information: https://www.7timer.info/doc.php#astro
+
+ */
 import * as React from 'react';
 import Map, { Source, Layer } from 'react-map-gl';
 import {useEffect, useState, useCallback, useRef} from 'react'
@@ -10,9 +24,9 @@ import { BsPlusLg } from 'react-icons/bs';
 
 export default function SimpleMap() {
     // information can be found here: https://www.7timer.info/doc.php#astro
-    const cloudCover = ["0%-6%","6%-19%","19%-31%","31%-44%","44%-56%","56%-69%","69%-81%","81%-94%", "94%-100%"]
+    const cloudCover = ["0%-6%","6%-19%","19%-31%","31%-44%","44%-56%","56%-69%","69%-81%","81%-94%", "94%-100%"];
     const windSpeed = [ "Below 0.3m/s (calm)", "0.3-3.4m/s (light)","3.4-8.0m/s (moderate)","8.0-10.8m/s (fresh)", 
-                    "10.8-17.2m/s (strong)","17.2-24.5m/s (gale)","24.5-32.6m/s (storm)","Over 32.6m/s (hurricane)"]
+                    "10.8-17.2m/s (strong)","17.2-24.5m/s (gale)","24.5-32.6m/s (storm)","Over 32.6m/s (hurricane)"];
 
     // the state of the map viewer
     const [viewState, setViewState] = useState({
@@ -22,7 +36,7 @@ export default function SimpleMap() {
       });
 
     // for the return data from the api
-    const [data, setData] = useState({});
+    const [weatherData, setWeatherData] = useState({});
 
     // used to signal retrieval of data and to disable "Get Weather" Button when making a request
     const [signalGetInfo, setGetInfo] = useState(false);
@@ -56,7 +70,7 @@ export default function SimpleMap() {
                     windDirection: data.dataseries[0].wind10m.direction,
                     windSpeed: data.dataseries[0].wind10m.speed
                 }
-                setData((prevState) => {
+                setWeatherData((prevState) => {
                     return ({...prevState, weather: newWeather })
                 })
             })
@@ -132,7 +146,7 @@ export default function SimpleMap() {
                 <BsPlusLg id="center"/>
                 <div  id="side-bar">
                     <p> Longitude: {viewState.longitude.toFixed(2)} | Latitude: {viewState.latitude.toFixed(2)} | Zoom : {viewState.zoom.toFixed(1)} </p>
-                    {data.weather? <p> Temperature: {data.weather.temp} | Cloud Cover: {cloudCover[data.weather.cloudCover]} | Wind Direction: {data.weather.windDirection} | Wind Speed: {windSpeed[data.weather.windSpeed]}</p> : <></>}
+                    {weatherData.weather? <p> Temperature: {weatherData.weather.temp} | Cloud Cover: {cloudCover[weatherData.weather.cloudCover]} | Wind Direction: {weatherData.weather.windDirection} | Wind Speed: {windSpeed[weatherData.weather.windSpeed]}</p> : <></>}
                     <Button onClick={() => {setGetInfo(true)}} disabled={signalGetInfo}>Get Weather</Button>
                     <Form.Check label="Select to add Earthquake data." onClick={() => {setEarthquakeDisplay(!enabledEarthquakeDisplay)}}/>                   
                 </div>
