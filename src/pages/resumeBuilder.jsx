@@ -91,9 +91,9 @@ export default function ResumeBuilder() {
     }
 
     return ( 
-        <div id="all">
+        <div id="resumeBuilderAll">
             <NavBar variant="light"/>
-            <div id="resume">
+            <div id="resumeBuilder">
                 <AuthenticatedTemplate>
                     <Stack direction="vertical" className="py-2">
                         <Stack direction="horizontal" className="mx-auto py-2">

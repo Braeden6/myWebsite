@@ -140,8 +140,7 @@ export default function SimpleMap() {
       }, []);
 
     return (
-        <Container id="all-map">
-            <NavBar variant="dark"/>
+        <>
             <div id="map-wrapper">
                 <BsPlusLg id="center"/>
                 <div  id="side-bar">
@@ -183,7 +182,8 @@ export default function SimpleMap() {
                 </Map>
                 
             </div>
-        </Container>
+            <NavBar variant="black"/>
+        </>
     );
 }
 // earthquakeData.map( (e) => <Marker longitude={e.longitude} latitude={e.latitude}><WiEarthquake id="bad" size={viewState.zoom*3} className="rounded"/></Marker>)

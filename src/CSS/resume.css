@@ -1,19 +1,33 @@
 
-#all, html {
+#myResumeAll {
     background-color: white;
+    padding-top: 8rem;
 }
 
 #myResume {
     min-height: 100vw;
 }
 
-#resume {
+#resumeBuilderAll {
     background-color: white;
+    padding-top: 8rem;
+}
+
+
+#resumeBuilder {
+    background-color: white;
+    max-width: 900px;
+    margin: auto;
     padding-left: 2rem;
     padding-right: 2rem;
+}
+
+#resume {
     align-self: center;
     max-width: 900px;
     margin: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
 #name {

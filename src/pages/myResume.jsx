@@ -28,12 +28,6 @@ export default function MyResume() {
     .then((res) => res.json())
     .then((data) => setResume(data.resume));
 }, [])
-
-useEffect(() => {
-  console.log(resume);
-}, [resume])
-
-
   
   async function printPDF() {
     const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -46,7 +40,7 @@ useEffect(() => {
   }
   
   return (
-    <div id="all">
+    <div id="myResumeAll">
       <NavBar variant="light"/>
       <div id="myResume">
         <Stack className='mx-4 align-items-center justify-content-center text-center' >
@@ -56,7 +50,6 @@ useEffect(() => {
         </Stack>
         {resume? <ResumeViewer resume={resume}/> : <></>}
       </div>
-      
     </div>
   )
 }

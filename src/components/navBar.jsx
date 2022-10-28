@@ -19,9 +19,9 @@ export default function NavBar(style) {
   }, [accounts, instance]);
 
   return (
-    <>
+    <div id="navbar-wrapper">
         <div className="mt-5"></div>
-        <Navbar bg="translucent"variant={style.variant} expand="md">
+        <Navbar bg="translucent" variant={style.variant} expand="md">
         <div className="mx-5"></div>
         <Container fluid>
             <Navbar.Brand href="/">Braeden Norman</Navbar.Brand>
@@ -37,10 +37,8 @@ export default function NavBar(style) {
                 </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
-            <Nav
-                className="justify-content-end flex-grow-1 pe-3"
-            >
-                <Nav.Link href="/">Home</Nav.Link>
+            <Nav className="justify-content-end flex-grow-1 pe-3" id="test">
+                <Nav.Link href="/" >Home</Nav.Link>
                 <Nav.Link href="/map">Map</Nav.Link>
                 <NavDropdown title="Resume" id="basic-nav-dropdown" align="end">
                   <NavDropdown.Item href="/myResume">My Resume</NavDropdown.Item>
@@ -60,7 +58,7 @@ export default function NavBar(style) {
         </Container>
         <div className="mx-5"></div>
         </Navbar>
-    </>
+      </div>
     
   )
 }
