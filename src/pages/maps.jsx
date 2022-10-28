@@ -182,7 +182,7 @@ export default function SimpleMap() {
                 </Map>
                 
             </div>
-            <NavBar variant="black"/>
+            <NavBar color="black"/>
         </>
     );
 }

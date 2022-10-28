@@ -6,7 +6,7 @@ import { Nav } from "react-bootstrap";
 /**
  * Renders a button which, when selected, will open a popup for logout
  */
-export const SignOutButton = () => {
+export const SignOutButton = (props) => {
     const { instance } = useMsal();
 
 
@@ -19,7 +19,7 @@ export const SignOutButton = () => {
 
     return (
         <>
-            <Nav.Link onClick={() => handleLogout(instance)}>Logout <AiOutlineLogout/></Nav.Link>
+            <Nav.Link onClick={() => handleLogout(instance)} style={{"color":props.color}}>Logout <AiOutlineLogout/></Nav.Link>
         </>
     );
 }

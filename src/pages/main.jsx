@@ -20,7 +20,7 @@ export default function Main() {
     return (
       <>     
       <Container id="mainAll">
-        <NavBar variant="dark"/>
+        <NavBar color="white"/>
         <Carousel interval={10000} id="carousel">
           <Carousel.Item>
             <Stack id="item">

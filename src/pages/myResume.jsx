@@ -41,7 +41,7 @@ export default function MyResume() {
   
   return (
     <div id="myResumeAll">
-      <NavBar variant="light"/>
+      <NavBar color="black"/>
       <div id="myResume">
         <Stack className='mx-4 align-items-center justify-content-center text-center' >
           <Button  variant='primary' onClick={ () => {
