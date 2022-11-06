@@ -1,5 +1,4 @@
 /*
- 
   Braeden's Personal Website
   Author: Braeden Norman
   Date: 2022-10-27
@@ -22,9 +21,11 @@ export default function MyResume() {
   const [ resume, setResume ] = useState(null);
 
   useEffect(() => {
-    fetch((process.env.NODE_ENV === "production"? process.env.REACT_APP_PRODUCTION_URL: process.env.REACT_APP_DEV_URL) + "getMyResume",{
-      method: 'GET'
-    })
+    fetch((process.env.NODE_ENV === "production"? 
+      import.meta.env.VITE_PRODUCTION_URL: 
+      import.meta.env.VITE_DEV_URL) + "getMyResume",{
+        method: 'GET'
+      })
     .then((res) => res.json())
     .then((data) => setResume(data.resume));
 }, [])

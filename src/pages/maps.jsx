@@ -16,7 +16,7 @@ import * as React from 'react';
 import Map, { Source, Layer } from 'react-map-gl';
 import {useEffect, useState, useCallback, useRef} from 'react'
 import "../CSS/map.css"
-import { Button, Container, Form } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import NavBar from '../components/navBar';
 import { BsPlusLg } from 'react-icons/bs';
 
@@ -84,9 +84,11 @@ export default function SimpleMap() {
     useEffect(() => {
         if (enabledEarthquakeDisplay && !earthquakeDataInitialized.current ) {
             earthquakeDataInitialized.current = true;
-            fetch((process.env.NODE_ENV === "production"? process.env.REACT_APP_PRODUCTION_URL: process.env.REACT_APP_DEV_URL) + "getEarthquakeData",{
-                method: 'GET'
-            })
+            fetch((process.env.NODE_ENV === "production"? 
+                import.meta.env.VITE_PRODUCTION_URL: 
+                import.meta.env.VITE_DEV_URL) + "getEarthquakeData",{
+                    method: 'GET'
+                })
             .then((res) => res.json())
             .then((data) => setEarthquakeData({
                 "type" : "FeatureCollection",
@@ -155,6 +157,7 @@ export default function SimpleMap() {
                     mapStyle="mapbox://styles/mapbox/streets-v11"
                     interactiveLayerIds={['point']}
                     onMouseMove={onHover}
+                    mapboxAccessToken={import.meta.env.VITE_MAPBOX_ACCESS_TOKEN}
                 >  
                     
                     {enabledEarthquakeDisplay && earthquakeData !== null &&
@@ -186,4 +189,3 @@ export default function SimpleMap() {
         </>
     );
 }
-// earthquakeData.map( (e) => <Marker longitude={e.longitude} latitude={e.latitude}><WiEarthquake id="bad" size={viewState.zoom*3} className="rounded"/></Marker>)
