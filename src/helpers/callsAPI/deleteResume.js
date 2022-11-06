@@ -15,10 +15,7 @@ export default async function DeleteResume(instance, accounts, deleteName) {
         deleteName: deleteName,
       }
 
-      fetch((process.env.NODE_ENV === "production"? 
-                    import.meta.env.VITE_PRODUCTION_URL: 
-                    import.meta.env.VITE_DEV_URL) + "deleteResume?"  
-                    + new URLSearchParams({code: import.meta.env.VITE_DELETE_RESUME}).toString(), {
+      fetch(import.meta.env.VITE_API_URL + "deleteResume?" + new URLSearchParams({code: import.meta.env.VITE_DELETE_RESUME}).toString(), {
           method: 'DELETE',
           body: JSON.stringify(parameters)
         })

@@ -21,9 +21,7 @@ export default function MyResume() {
   const [ resume, setResume ] = useState(null);
 
   useEffect(() => {
-    fetch((process.env.NODE_ENV === "production"? 
-      import.meta.env.VITE_PRODUCTION_URL: 
-      import.meta.env.VITE_DEV_URL) + "getMyResume",{
+    fetch(import.meta.env.VITE_API_URL + "getMyResume",{
         method: 'GET'
       })
     .then((res) => res.json())

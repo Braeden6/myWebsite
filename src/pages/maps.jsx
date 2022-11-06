@@ -84,9 +84,7 @@ export default function SimpleMap() {
     useEffect(() => {
         if (enabledEarthquakeDisplay && !earthquakeDataInitialized.current ) {
             earthquakeDataInitialized.current = true;
-            fetch((process.env.NODE_ENV === "production"? 
-                import.meta.env.VITE_PRODUCTION_URL: 
-                import.meta.env.VITE_DEV_URL) + "getEarthquakeData",{
+            fetch(import.meta.env.VITE_API_URL + "getEarthquakeData",{
                     method: 'GET'
                 })
             .then((res) => res.json())

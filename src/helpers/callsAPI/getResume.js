@@ -18,10 +18,7 @@ export default async function GetResume(instance, accounts, saveName ) {
     code: import.meta.env.VITE_GET_RESUME
   }
 
-    let resume = await fetch((process.env.NODE_ENV === "production"? 
-      import.meta.env.VITE_PRODUCTION_URL: 
-      import.meta.env.VITE_DEV_URL) + "getResume?" 
-      + new URLSearchParams(parameters).toString(), {
+    let resume = await fetch(import.meta.env.VITE_API_URL + "getResume?" + new URLSearchParams(parameters).toString(), {
         method: 'GET'
       })
       .then((res) => res.json())

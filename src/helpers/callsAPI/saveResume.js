@@ -16,10 +16,7 @@ export default async function SaveResume(instance, accounts, resume, saveName) {
         resume: resume
       }
 
-      fetch((process.env.NODE_ENV === "production"? 
-        import.meta.env.VITE_PRODUCTION_URL: 
-        import.meta.env.VITE_DEV_URL) + "saveResume?" 
-        + new URLSearchParams({code: import.meta.env.VITE_SAVE_RESUME}).toString(), {
+      fetch(import.meta.env.VITE_API_URL + new URLSearchParams({code: import.meta.env.VITE_SAVE_RESUME}).toString(), {
           method: 'POST',
           body: JSON.stringify(parameters)
         })
