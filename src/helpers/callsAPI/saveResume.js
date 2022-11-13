@@ -16,7 +16,7 @@ export default async function SaveResume(instance, accounts, resume, saveName) {
         resume: resume
       }
 
-      fetch((process.env.NODE_ENV === "production"? process.env.REACT_APP_PRODUCTION_URL: process.env.REACT_APP_DEV_URL) + "saveResume?" + new URLSearchParams({code: process.env.REACT_APP_SAVE_RESUME}).toString(), {
+      fetch(import.meta.env.VITE_API_URL + new URLSearchParams({code: import.meta.env.VITE_SAVE_RESUME}).toString(), {
           method: 'POST',
           body: JSON.stringify(parameters)
         })

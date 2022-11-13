@@ -1,5 +1,5 @@
 
-// EFFECT: Makes call API getResume. Returns resume saveName if authenticated and found
+// EFFECT: Makes call API getResume. Returnenvs resume saveName if authenticated and found
 // REQUIRES: instance and accounts from useMsal from "@azure/msal-react", and saveName is a string
 // MODIFIES: none of the input
 // RETURNS: Resumes in Object/JSON format redefined
@@ -15,10 +15,10 @@ export default async function GetResume(instance, accounts, saveName ) {
     email: accounts[0].username,
     token: token.idToken,
     saveName: saveName,
-    code: process.env.REACT_APP_GET_RESUME
+    code: import.meta.env.VITE_GET_RESUME
   }
 
-    let resume = await fetch((process.env.NODE_ENV === "production"? process.env.REACT_APP_PRODUCTION_URL: process.env.REACT_APP_DEV_URL) + "getResume?" + new URLSearchParams(parameters).toString(), {
+    let resume = await fetch(import.meta.env.VITE_API_URL + "getResume?" + new URLSearchParams(parameters).toString(), {
         method: 'GET'
       })
       .then((res) => res.json())

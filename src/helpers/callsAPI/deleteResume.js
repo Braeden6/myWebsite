@@ -15,7 +15,7 @@ export default async function DeleteResume(instance, accounts, deleteName) {
         deleteName: deleteName,
       }
 
-      fetch((process.env.NODE_ENV === "production"? process.env.REACT_APP_PRODUCTION_URL: process.env.REACT_APP_DEV_URL) + "deleteResume?"  + new URLSearchParams({code: process.env.REACT_APP_DELETE_RESUME}).toString(), {
+      fetch(import.meta.env.VITE_API_URL + "deleteResume?" + new URLSearchParams({code: import.meta.env.VITE_DELETE_RESUME}).toString(), {
           method: 'DELETE',
           body: JSON.stringify(parameters)
         })

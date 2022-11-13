@@ -1,3 +1,12 @@
+/*
+  Braeden's Personal Website
+  Author: Braeden Norman
+  Date: 2022-10-27
+
+  Helpful Information
+
+  Print Window JavaScript: https://developer.mozilla.org/en-US/docs/Web/API/Window/print
+ */
 import React, {useState, useEffect} from 'react';
 import "../CSS/resume.css";
 import NavBar from "../components/navBar";
@@ -12,18 +21,12 @@ export default function MyResume() {
   const [ resume, setResume ] = useState(null);
 
   useEffect(() => {
-    fetch((process.env.NODE_ENV === "production"? process.env.REACT_APP_PRODUCTION_URL: process.env.REACT_APP_DEV_URL) + "getMyResume",{
-      method: 'GET'
-    })
+    fetch(import.meta.env.VITE_API_URL + "getMyResume",{
+        method: 'GET'
+      })
     .then((res) => res.json())
     .then((data) => setResume(data.resume));
 }, [])
-
-useEffect(() => {
-  console.log(resume);
-}, [resume])
-
-
   
   async function printPDF() {
     const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -36,14 +39,16 @@ useEffect(() => {
   }
   
   return (
-    <div id="all">
-      <NavBar variant="light"/>
-      <Stack className='mx-4 align-items-center justify-content-center text-center'>
-        <Button  variant='primary' onClick={ () => {
-          printPDF();
-            }} disabled={resume===null}>Print Resume</Button>
-      </Stack>
-      {resume? <ResumeViewer resume={resume}/> : <></>}
+    <div id="myResumeAll">
+      <NavBar color="black"/>
+      <div id="myResume">
+        <Stack className='mx-4 align-items-center justify-content-center text-center' >
+          <Button  variant='primary' onClick={ () => {
+            printPDF();
+              }} disabled={resume===null}>Print Resume</Button>
+        </Stack>
+        {resume? <ResumeViewer resume={resume}/> : <></>}
+      </div>
     </div>
   )
 }

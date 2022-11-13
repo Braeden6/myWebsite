@@ -7,7 +7,8 @@ import { Nav } from "react-bootstrap";
 /**
  * Renders a button which, when selected, will open a popup for login
  */
-export const SignInButton = () => {
+export const SignInButton = (props) => {
+
     const { instance } = useMsal();
     async function handleLogin(instance) {
         await instance.loginRedirect(loginRequest).catch(e => {
@@ -17,7 +18,7 @@ export const SignInButton = () => {
 
     return (
         <>
-            <Nav.Link onClick={() => {handleLogin(instance)}}>Login <AiOutlineLogin/></Nav.Link>
+            <Nav.Link onClick={() => {handleLogin(instance)}} style={{"color":props.color}}>Login <AiOutlineLogin/></Nav.Link>
         </>
     );
 }

@@ -1,3 +1,13 @@
+/*
+ 
+  Braeden's Personal Website
+  Author: Braeden Norman
+  Date: 2022-10-27
+
+  Helpful Information
+
+  Authentication Template Msal: https://learn.microsoft.com/en-us/azure/active-directory/develop/tutorial-v2-react
+ */
 import ResumeEditor from "../helpers/resume/resumeEditor";
 import NavBar from "../components/navBar";
 import { useMsal } from "@azure/msal-react";
@@ -81,9 +91,9 @@ export default function ResumeBuilder() {
     }
 
     return ( 
-        <div id="all">
-            <NavBar variant="light"/>
-            <div id="resume">
+        <div id="resumeBuilderAll">
+            <NavBar color="black"/>
+            <div id="resumeBuilder">
                 <AuthenticatedTemplate>
                     <Stack direction="vertical" className="py-2">
                         <Stack direction="horizontal" className="mx-auto py-2">

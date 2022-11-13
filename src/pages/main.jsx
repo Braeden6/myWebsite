@@ -1,3 +1,14 @@
+/*
+ 
+  Braeden's Personal Website
+  Author: Braeden Norman
+  Date: 2022-10-27
+
+  Helpful Information
+
+  Carousel Bootstrap: https://react-bootstrap.github.io/components/carousel/
+  Cards Bootstrap: https://react-bootstrap.github.io/components/cards/
+ */
 import React from 'react';
 import NavBar from "../components/navBar"
 import {AiFillGithub, AiFillLinkedin} from "react-icons/ai"
@@ -5,12 +16,11 @@ import image from '../images/main-selfie.jpg'
 import '../CSS/main.css'
 import { Stack, Container, Card, Button, Carousel } from "react-bootstrap";
 
-//<Image src={main} id="mainImage"/> 
 export default function Main() {
     return (
       <>     
       <Container id="mainAll">
-        <NavBar variant="dark"/>
+        <NavBar color="white"/>
         <Carousel interval={10000} id="carousel">
           <Carousel.Item>
             <Stack id="item">

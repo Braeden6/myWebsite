@@ -1,3 +1,13 @@
+/*
+ 
+  Braeden's Personal Website
+  Author: Braeden Norman
+  Date: 2022-10-27
+
+  Helpful Information
+
+  This is for testing purposes only.
+ */
 import React from 'react';
 import NavBar from "../components/navBar";
 

@@ -16,7 +16,7 @@ export default async function CreateAccount(instance, accounts) {
     account: accounts[0], 
     token: token.idToken,
   }
-  fetch((process.env.NODE_ENV === "production"? process.env.REACT_APP_PRODUCTION_URL: process.env.REACT_APP_DEV_URL) + "addUser?"  + new URLSearchParams({code: process.env.REACT_APP_ADD_USER}).toString(), {
+  fetch((import.meta.env.VITE_API_URL) + "addUser?" + new URLSearchParams({code: import.meta.env.VITE_ADD_USER}).toString(), {
       method: 'POST',
       body: JSON.stringify(parameters)
     })
