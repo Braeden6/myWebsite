@@ -153,7 +153,7 @@ export default function SimpleMap() {
                     {...viewState}
                     onMove={evt => setViewState(evt.viewState)}
                     mapStyle="mapbox://styles/mapbox/streets-v11"
-                    interactiveLayerIds={['point']}
+                    interactiveLayerIds={enabledEarthquakeDisplay && earthquakeData !== null? ['point']: []}
                     onMouseMove={onHover}
                     mapboxAccessToken={import.meta.env.VITE_MAPBOX_ACCESS_TOKEN}
                 >  
