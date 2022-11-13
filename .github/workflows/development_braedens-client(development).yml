@@ -9,6 +9,9 @@ on:
       - development
   workflow_dispatch:
 
+env:
+  SOME_TEST_123 : ${{ secrets.SOME_TEST123 }}
+
 jobs:
   build:
     runs-on: 'ubuntu-latest'

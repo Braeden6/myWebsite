@@ -8,6 +8,13 @@ import { MsalProvider } from "@azure/msal-react";
 import { msalConfig } from "./configFiles/authConfig"
 import './index.css';
 
+if (process.env.NODE_ENV !== 'production') {
+  console.log(import.meta.env.VITE_TEST);
+} else {
+  console.log(process.env.TEST);
+}
+
+
 // disable console when in production
 if (process.env.NODE_ENV === 'production') {
   console.log = () => {}
