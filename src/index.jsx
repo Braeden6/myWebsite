@@ -11,7 +11,7 @@ import './index.css';
 if (process.env.NODE_ENV !== 'production') {
   console.log(import.meta.env.VITE_TEST);
 } else {
-  console.log(process.env.TEST);
+  console.log(process.env.SOME_TEST_123);
 }
 
 
