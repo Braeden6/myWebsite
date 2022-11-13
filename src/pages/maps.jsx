@@ -19,6 +19,7 @@ import "../CSS/map.css"
 import { Button, Form } from 'react-bootstrap';
 import NavBar from '../components/navBar';
 import { BsPlusLg } from 'react-icons/bs';
+import CountrySearch from '../components/map/countrySearch';
 
  
 
@@ -84,7 +85,7 @@ export default function SimpleMap() {
     useEffect(() => {
         if (enabledEarthquakeDisplay && !earthquakeDataInitialized.current ) {
             earthquakeDataInitialized.current = true;
-            fetch(import.meta.env.VITE_API_URL + "getEarthquakeData",{
+            fetch(import.meta.env.VITE_MAP_API + "getEarthquakeData",{
                     method: 'GET'
                 })
             .then((res) => res.json())
@@ -94,8 +95,6 @@ export default function SimpleMap() {
             }))
         }
     }, [enabledEarthquakeDisplay]);
-
-
 
     const layerStyle = {
         id: 'point',
@@ -138,13 +137,14 @@ export default function SimpleMap() {
         // prettier-ignore
         setHoverInfo(hoveredFeature && {feature: hoveredFeature, x, y});
       }, []);
-
+    
     return (
         <>
             <div id="map-wrapper">
                 <BsPlusLg id="center"/>
                 <div  id="side-bar">
                     <p> Longitude: {viewState.longitude.toFixed(2)} | Latitude: {viewState.latitude.toFixed(2)} | Zoom : {viewState.zoom.toFixed(1)} </p>
+                    <CountrySearch setViewState={setViewState}/>
                     {weatherData.weather? <p> Temperature: {weatherData.weather.temp} | Cloud Cover: {cloudCover[weatherData.weather.cloudCover]} | Wind Direction: {weatherData.weather.windDirection} | Wind Speed: {windSpeed[weatherData.weather.windSpeed]}</p> : <></>}
                     <Button onClick={() => {setGetInfo(true)}} disabled={signalGetInfo}>Get Weather</Button>
                     <Form.Check label="Select to add Earthquake data." onClick={() => {setEarthquakeDisplay(!enabledEarthquakeDisplay)}}/>                   
@@ -179,7 +179,6 @@ export default function SimpleMap() {
                             <div>Depth: {hoverInfo.feature.properties.depth}</div>
                         </div>
                         )}
-                    
                 </Map>
                 
             </div>
