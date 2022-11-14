@@ -10,7 +10,8 @@ on:
   workflow_dispatch:
 
 env:
-  SOME_TEST_123 : ${{ secrets.SOME_TEST123 }}
+  VITE_TEST : ${{ secrets.VITE_TEST }}
+  VITE_TEST2 : "without secret"
 
 jobs:
   build:
@@ -30,6 +31,8 @@ jobs:
         password: ${{ secrets.AzureAppService_ContainerPassword_1710ccbe872742a2855cac3dc10d1922 }}
 
     - name: Build and push container image to registry
+      env:
+        VITE_TEST3 : "without secret"
       uses: docker/build-push-action@v2
       with:
         push: true
