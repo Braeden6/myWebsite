@@ -16,11 +16,12 @@ if (process.env.NODE_ENV !== 'production') {
 
 
 // disable console when in production
+/*
 if (process.env.NODE_ENV === 'production') {
   console.log = () => {}
   console.error = () => {}
   console.debug = () => {}
-}
+}*/
 
 const msalInstance = new PublicClientApplication(msalConfig);
 
