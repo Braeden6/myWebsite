@@ -3,6 +3,7 @@
 // REQUIRES: instance and accounts from useMsal from "@azure/msal-react", and saveName is a string
 // MODIFIES: none of the input
 // RETURNS: Resumes in Object/JSON format redefined
+import { variables } from "../../configFiles/variables";
 export default async function GetResume(instance, accounts, saveName ) { 
   const accessTokenRequest = {
     scopes: ["user.read"],
@@ -18,7 +19,7 @@ export default async function GetResume(instance, accounts, saveName ) {
     code: import.meta.env.VITE_GET_RESUME
   }
 
-    let resume = await fetch(import.meta.env.VITE_API_URL + "getResume?" + new URLSearchParams(parameters).toString(), {
+    let resume = await fetch(variables.BACKEND_URL + "users/getResume?" + new URLSearchParams(parameters).toString(), {
         method: 'GET'
       })
       .then((res) => res.json())

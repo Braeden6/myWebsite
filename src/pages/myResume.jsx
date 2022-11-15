@@ -14,6 +14,7 @@ import ResumeViewer from "../helpers/resume/resumeViewer"
 import * as ReactDOM from "react-dom/client";
 import  { useNavigate } from 'react-router-dom'
 import {Stack, Button} from 'react-bootstrap';
+import { variables } from "../configFiles/variables";
 
 export default function MyResume() {
   let Navigate = useNavigate();
@@ -21,7 +22,7 @@ export default function MyResume() {
   const [ resume, setResume ] = useState(null);
 
   useEffect(() => {
-    fetch(import.meta.env.VITE_API_URL + "getMyResume",{
+    fetch(variables.BACKEND_URL + "users/getMyResume",{
         method: 'GET'
       })
     .then((res) => res.json())

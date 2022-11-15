@@ -2,6 +2,7 @@
 // EFFECT: Makes call API deleteResume. Removes resume from database if deleteName is found
 // REQUIRES: instance and accounts from useMsal from "@azure/msal-react", and deleteName is a string
 // MODIFIES: none of the input
+import { variables } from "../../configFiles/variables";
 export default async function DeleteResume(instance, accounts, deleteName) { 
     const accessTokenRequest = {
         scopes: ["user.read"],
@@ -14,9 +15,11 @@ export default async function DeleteResume(instance, accounts, deleteName) {
         token: token.idToken,
         deleteName: deleteName,
       }
-
-      fetch(import.meta.env.VITE_API_URL + "deleteResume?" + new URLSearchParams({code: import.meta.env.VITE_DELETE_RESUME}).toString(), {
+      fetch(variables.BACKEND_URL + "users/deleteResume", {
           method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
           body: JSON.stringify(parameters)
         })
         .then((res) => res.json())

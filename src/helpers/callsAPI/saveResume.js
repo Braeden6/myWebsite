@@ -2,6 +2,7 @@
 // EFFECT: Makes call API saveResume. Saves given resume to saveName in database
 // REQUIRES: instance and accounts from useMsal from "@azure/msal-react", Object/JSON formatted like resume.json
 // MODIFIES: none of the input
+import { variables } from "../../configFiles/variables";
 export default async function SaveResume(instance, accounts, resume, saveName) { 
     const accessTokenRequest = {
         scopes: ["user.read"],
@@ -16,8 +17,11 @@ export default async function SaveResume(instance, accounts, resume, saveName) {
         resume: resume
       }
 
-      fetch(import.meta.env.VITE_API_URL + new URLSearchParams({code: import.meta.env.VITE_SAVE_RESUME}).toString(), {
+      fetch(variables.BACKEND_URL + "users/saveResume", {
           method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
           body: JSON.stringify(parameters)
         })
         .then((res) => res.json())
