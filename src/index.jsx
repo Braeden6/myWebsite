@@ -8,12 +8,6 @@ import { MsalProvider } from "@azure/msal-react";
 import { msalConfig } from "./configFiles/authConfig"
 import './index.css';
 
-
-console.log(import.meta.env.VITE_TEST);
-console.log(import.meta.env.VITE_TEST2);
-console.log(import.meta.env.VITE_TEST3);
-
-
 // disable console when in production
 /*
 if (process.env.NODE_ENV === 'production') {
