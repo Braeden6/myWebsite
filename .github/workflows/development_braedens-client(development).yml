@@ -31,7 +31,7 @@ jobs:
       with:
         push: true
         tags: braedensimages.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_bd45b5e7d0ce47c682ae51f218f5ca43 }}/braedens-frontend-developement:${{ github.sha }}
-        file: ./Dockerfile
+        file: ./Dockerfile.development
 
   deploy:
     runs-on: ubuntu-latest

@@ -1,8 +1,8 @@
 
 
-export const variables =  process.env.NODE_ENV === 'production' ?
+export const variables =  process.env.NODE_ENV !== 'local' ?
 {
-    BACKEND_URL:  "https://braedens-backend-development.azurewebsites.net/api/" ,
+    BACKEND_URL: process.env.NODE_ENV === 'production' ? "https://braedens-backend.azurewebsites.net/api/" : "https://braedens-backend-development.azurewebsites.net/api/",
     // this key specifically can only be used by certain urls
     MAPBOX_ACCESS_TOKEN: "pk.eyJ1IjoidGltbXl0dXJuZXIxMDEiLCJhIjoiY2w5MG9idXF1MDBmejN1bXF3N200MzZsaiJ9.shZvkoIVU-ruhxwfGQ6d9w",
     // TODO: make sure this is fine to be public

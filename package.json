@@ -26,9 +26,10 @@
     "react-scripts": "5.0.1"
   },
   "scripts": {
-    "dev": "vite",
+    "local": "set NODE_ENV=local && vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "dev": "vite" 
   },
   "eslintConfig": {
     "extends": [
