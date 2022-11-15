@@ -15,7 +15,7 @@ export default async function DeleteResume(instance, accounts, deleteName) {
         token: token.idToken,
         deleteName: deleteName,
       }
-      fetch(variables.BACKEND_URL + "deleteResume", {
+      fetch(variables.BACKEND_URL + "users/deleteResume", {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',

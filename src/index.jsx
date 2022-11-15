@@ -9,12 +9,12 @@ import { msalConfig } from "./configFiles/authConfig"
 import './index.css';
 
 // disable console when in production
-/*
+
 if (process.env.NODE_ENV === 'production') {
   console.log = () => {}
   console.error = () => {}
   console.debug = () => {}
-}*/
+}
 
 const msalInstance = new PublicClientApplication(msalConfig);
 

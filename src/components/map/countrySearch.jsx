@@ -24,7 +24,7 @@ export default function CountrySearch(props) {
 
 
     useEffect( () => {
-        fetch(variables.BACKEND_MAP_URL + "getLocations",{
+        fetch(variables.BACKEND_URL + "map/getLocations",{
             method: 'GET'
         })
         .then((res) => res.json())

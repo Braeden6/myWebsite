@@ -22,7 +22,7 @@ export default function MyResume() {
   const [ resume, setResume ] = useState(null);
 
   useEffect(() => {
-    fetch(variables.BACKEND_URL + "getMyResume",{
+    fetch(variables.BACKEND_URL + "users/getMyResume",{
         method: 'GET'
       })
     .then((res) => res.json())

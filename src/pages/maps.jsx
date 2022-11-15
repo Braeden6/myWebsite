@@ -85,7 +85,7 @@ export default function SimpleMap() {
     useEffect(() => {
         if (enabledEarthquakeDisplay && !earthquakeDataInitialized.current ) {
             earthquakeDataInitialized.current = true;
-            fetch(variables.BACKEND_MAP_URL + "getEarthquakeData",{
+            fetch(variables.BACKEND_URL + "map/getEarthquakeData",{
                     method: 'GET'
                 })
             .then((res) => res.json())

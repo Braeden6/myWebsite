@@ -18,7 +18,7 @@ export default async function CreateAccount(instance, accounts) {
     token: token.idToken,
   }
 
-  fetch(variables.BACKEND_URL + "addUser", {
+  fetch(variables.BACKEND_URL + "users/addUser", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

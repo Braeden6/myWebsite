@@ -17,7 +17,7 @@ export default async function SaveResume(instance, accounts, resume, saveName) {
         resume: resume
       }
 
-      fetch(variables.BACKEND_URL + "saveResume", {
+      fetch(variables.BACKEND_URL + "users/saveResume", {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

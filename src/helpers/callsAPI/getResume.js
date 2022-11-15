@@ -19,7 +19,7 @@ export default async function GetResume(instance, accounts, saveName ) {
     code: import.meta.env.VITE_GET_RESUME
   }
 
-    let resume = await fetch(variables.BACKEND_URL + "getResume?" + new URLSearchParams(parameters).toString(), {
+    let resume = await fetch(variables.BACKEND_URL + "users/getResume?" + new URLSearchParams(parameters).toString(), {
         method: 'GET'
       })
       .then((res) => res.json())

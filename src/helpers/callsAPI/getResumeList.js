@@ -16,7 +16,7 @@ export default async function GetResumeList(instance, accounts) {
       token: token.idToken,
       code: import.meta.env.VITE_GET_RESUME_LIST
   }
-  let resumes = await fetch(variables.BACKEND_URL + "getResumeList?" + new URLSearchParams(parameters).toString(), {
+  let resumes = await fetch(variables.BACKEND_URL + "users/getResumeList?" + new URLSearchParams(parameters).toString(), {
       method: 'GET'
     })
     .then((res) => res.json())
