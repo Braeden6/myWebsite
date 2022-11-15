@@ -13,6 +13,7 @@ import * as React from 'react';
 import {useState, useEffect} from 'react';
 import { Dropdown, Form } from 'react-bootstrap';
 import './countrySearch.css';
+import { variables } from '../../configFiles/variables';
 
 
 export default function CountrySearch(props) {
@@ -23,7 +24,7 @@ export default function CountrySearch(props) {
 
 
     useEffect( () => {
-        fetch(import.meta.env.VITE_MAP_API + "getLocations",{
+        fetch(variables.BACKEND_MAP_URL + "getLocations",{
             method: 'GET'
         })
         .then((res) => res.json())

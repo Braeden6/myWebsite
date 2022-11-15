@@ -2,6 +2,7 @@
 // EFFECT: Makes call API addUser. Creates account if not already in database
 // REQUIRES: instance and accounts from useMsal from "@azure/msal-react"
 // MODIFIES: none of the inputs
+import { variables } from "../../configFiles/variables";
 export default async function CreateAccount(instance, accounts) { 
   const accessTokenRequest = {
     scopes: ["user.read"],
@@ -16,8 +17,12 @@ export default async function CreateAccount(instance, accounts) {
     account: accounts[0], 
     token: token.idToken,
   }
-  fetch((import.meta.env.VITE_API_URL) + "addUser?" + new URLSearchParams({code: import.meta.env.VITE_ADD_USER}).toString(), {
+
+  fetch(variables.BACKEND_URL + "addUser", {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(parameters)
     })
     .then((res) => res.json())

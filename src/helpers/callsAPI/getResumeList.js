@@ -3,6 +3,7 @@
 // REQUIRES: instance and accounts from useMsal from "@azure/msal-react"
 // MODIFIES: none of the input
 // RETURNS: List of strings that are the names of saved resumes
+import { variables } from "../../configFiles/variables";
 export default async function GetResumeList(instance, accounts) { 
   const accessTokenRequest = {
     scopes: ["user.read"],
@@ -15,7 +16,7 @@ export default async function GetResumeList(instance, accounts) {
       token: token.idToken,
       code: import.meta.env.VITE_GET_RESUME_LIST
   }
-  let resumes = await fetch(import.meta.env.VITE_API_URL + "getResumeList?" + new URLSearchParams(parameters).toString(), {
+  let resumes = await fetch(variables.BACKEND_URL + "getResumeList?" + new URLSearchParams(parameters).toString(), {
       method: 'GET'
     })
     .then((res) => res.json())

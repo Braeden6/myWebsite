@@ -20,7 +20,7 @@ import { Button, Form } from 'react-bootstrap';
 import NavBar from '../components/navBar';
 import { BsPlusLg } from 'react-icons/bs';
 import CountrySearch from '../components/map/countrySearch';
-
+import { variables } from '../configFiles/variables';
  
 
 export default function SimpleMap() {
@@ -85,7 +85,7 @@ export default function SimpleMap() {
     useEffect(() => {
         if (enabledEarthquakeDisplay && !earthquakeDataInitialized.current ) {
             earthquakeDataInitialized.current = true;
-            fetch(import.meta.env.VITE_MAP_API + "getEarthquakeData",{
+            fetch(variables.BACKEND_MAP_URL + "getEarthquakeData",{
                     method: 'GET'
                 })
             .then((res) => res.json())
@@ -155,7 +155,7 @@ export default function SimpleMap() {
                     mapStyle="mapbox://styles/mapbox/streets-v11"
                     interactiveLayerIds={enabledEarthquakeDisplay && earthquakeData !== null? ['point']: []}
                     onMouseMove={onHover}
-                    mapboxAccessToken={import.meta.env.VITE_MAPBOX_ACCESS_TOKEN}
+                    mapboxAccessToken={variables.MAPBOX_ACCESS_TOKEN}
                 >  
                     
                     {enabledEarthquakeDisplay && earthquakeData !== null &&

@@ -4,6 +4,7 @@
  */
 
 import { LogLevel } from "@azure/msal-browser";
+import { variables } from "./variables";
 
 /**
  * Configuration object to be passed to MSAL instance on creation. 
@@ -12,7 +13,7 @@ import { LogLevel } from "@azure/msal-browser";
  */
 export const msalConfig = {
     auth: {
-        clientId: import.meta.env.VITE_AZURE_AD_LOGIN_CLIENT_ID,
+        clientId: variables.AZURE_AD_LOGIN_CLIENT_ID,
         authority: "https://login.microsoftonline.com/common/",
         redirectUri: "/"
     },
