@@ -26,7 +26,7 @@
     "react-scripts": "5.0.1"
   },
   "scripts": {
-    "local": "set NODE_ENV=local && vite",
+    "local": "set NODE_ENV=local&& vite",
     "build": "vite build",
     "preview": "vite preview",
     "dev": "vite" 
