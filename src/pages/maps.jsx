@@ -13,14 +13,15 @@
 
  */
 import * as React from 'react';
-import Map, { Source, Layer } from 'react-map-gl';
-import {useEffect, useState, useCallback, useRef} from 'react'
+import Map from 'react-map-gl';
+import {useEffect, useState, useCallback} from 'react'
 import "../CSS/map.css"
 import { Button, Form } from 'react-bootstrap';
 import NavBar from '../components/navBar';
 import { BsPlusLg } from 'react-icons/bs';
 import CountrySearch from '../components/map/countrySearch';
 import { variables } from '../configFiles/variables';
+import DisplaySource from '../components/map/displaySource';
  
 
 export default function SimpleMap() {
@@ -38,13 +39,15 @@ export default function SimpleMap() {
 
     // for the return data from the api
     const [weatherData, setWeatherData] = useState({});
-
     // used to signal retrieval of data and to disable "Get Weather" Button when making a request
     const [signalGetInfo, setGetInfo] = useState(false);
 
+
     // states for earthquake option 
     const [enabledEarthquakeDisplay, setEarthquakeDisplay ] = useState(false);
-    const [earthquakeData, setEarthquakeData] = useState(null);
+    const [enabledClustering, setClustering ] = useState(true);
+
+
     const [hoverInfo, setHoverInfo] = useState(null);
 
     // request information from API
@@ -79,55 +82,6 @@ export default function SimpleMap() {
         }
     }, [signalGetInfo, viewState])
 
-    
-    let earthquakeDataInitialized = useRef(false);
-    // get earthquake data if not already obtained
-    useEffect(() => {
-        if (enabledEarthquakeDisplay && !earthquakeDataInitialized.current ) {
-            earthquakeDataInitialized.current = true;
-            fetch(variables.BACKEND_URL + "map/getEarthquakeData",{
-                    method: 'GET'
-                })
-            .then((res) => res.json())
-            .then((data) => setEarthquakeData({
-                "type" : "FeatureCollection",
-                "features": data.earthquakes
-            }))
-        }
-    }, [enabledEarthquakeDisplay]);
-
-    const layerStyle = {
-        id: 'point',
-        type: 'circle',
-        filter: ['!', ['has', 'point_count']],
-        paint: {
-          'circle-radius': 10,
-          'circle-color': '#007cbf'
-        }
-      };
-
-      const clusterCountLayer = {
-        id: 'cluster-count',
-        type: 'symbol',
-        source: 'earthquakes',
-        filter: ['has', 'point_count'],
-        layout: {
-          'text-field': '{point_count_abbreviated}',
-          'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-          'text-size': 12
-        }
-      };
-
-    const clusterStyle = {
-        id: 'cluster',
-        type: 'circle',
-        filter: ['has', 'point_count'],
-        paint: {
-            'circle-color': ['step', ['get', 'point_count'], '#51bbd6', 100, '#f1f075', 750, '#f28cb1'],
-            'circle-radius': ['step', ['get', 'point_count'], 20, 100, 30, 750, 40]
-        }
-    }
-
     const onHover = useCallback(event => {
         const {
           features,
@@ -153,32 +107,24 @@ export default function SimpleMap() {
                     {...viewState}
                     onMove={evt => setViewState(evt.viewState)}
                     mapStyle="mapbox://styles/mapbox/streets-v11"
-                    interactiveLayerIds={enabledEarthquakeDisplay && earthquakeData !== null? ['point']: []}
+                    interactiveLayerIds={['point']}
                     onMouseMove={onHover}
                     mapboxAccessToken={variables.MAPBOX_ACCESS_TOKEN}
                 >  
-                    
-                    {enabledEarthquakeDisplay && earthquakeData !== null &&
-                        <Source 
-                            id="earthquakes" 
-                            type="geojson" 
-                            data={earthquakeData}
-                            cluster={true}
-                        >
-                            <Layer {...clusterStyle}/>
-                            <Layer {...clusterCountLayer} />
-                            <Layer {...layerStyle} />
-                        </Source>
-                        }
+                    <DisplaySource 
+                        enabledDisplay = {enabledEarthquakeDisplay} 
+                        layerColour={"blue"} 
+                        dataURL= {variables.BACKEND_URL + "map/getEarthquakeData"} 
+                        cluster={enabledClustering}
+                        dataName={"earthquakes"}
+                    />
                     {hoverInfo && (
                         <div id="tooltip" style={{left: hoverInfo.x, top: hoverInfo.y}}>
-                            <div>Type: {hoverInfo.feature.properties.type}</div>
-                            <div>Time: {hoverInfo.feature.properties.time}</div>
-                            <div>Date: {hoverInfo.feature.properties.date}</div>
-                            <div>Magnitude: {hoverInfo.feature.properties.magnitude}</div>
-                            <div>Depth: {hoverInfo.feature.properties.depth}</div>
+                            {Object.keys(hoverInfo.feature.properties).map((value) => 
+                                <div key={hoverInfo.feature.properties[value]}>{value.charAt(0).toUpperCase() + value.slice(1)}: {hoverInfo.feature.properties[value]}</div>
+                            )}  
                         </div>
-                        )}
+                    )}
                 </Map>
                 
             </div>
