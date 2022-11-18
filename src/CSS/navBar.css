@@ -1,7 +1,7 @@
 .navbar {
     position: absolute;
     top: 0;
-    margin: 2rem;
+    margin: 3rem;
     z-index: 10;
   }
 
@@ -13,8 +13,12 @@
     z-index: 1;
   }
 
-  .div {
-    color: black;
-  }
-
-  
+  /* make navbar text black when offcanvas is enabled */
+  @media only screen and (max-width: 768px) {
+    .nav-link {
+      color: black!important;
+    }
+    #dropdown-title {
+      color: black!important;
+    }
+   }
