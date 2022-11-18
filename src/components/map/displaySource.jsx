@@ -6,17 +6,24 @@ export default function DisplaySource(props) {
     const colour = props.layerColour;
     const dataURL = props.dataURL;
     const cluster = props.cluster;
-    const dataName = props.dataName;;
+    const dataName = props.dataName;
+    const setInteractiveLayerIdsList = props.setInteractiveLayerIdsList;
     let enabledDisplay = props.enabledDisplay;
-
-    
-    
 
     // states for display data option 
     const [displayData, setDisplayData] = useState(null);
 
-
     let displayDataInitialized = useRef(false);
+
+    useEffect(() => {
+        if (enabledDisplay && displayData !== null) {
+            setInteractiveLayerIdsList((interactiveLayerIdsList) => [...interactiveLayerIdsList, dataName]);
+        } else {
+            setInteractiveLayerIdsList((interactiveLayerIdsList) => interactiveLayerIdsList.filter((layer) => layer !== dataName));
+        }
+    },[displayData, enabledDisplay]);
+
+
     // get display data if not already obtained
     useEffect(() => {
         if (enabledDisplay && !displayDataInitialized.current ) {
@@ -40,17 +47,9 @@ export default function DisplaySource(props) {
                 console.log(error);
             }  
         }
-    }, [enabledDisplay, dataURL]);
+    }, [enabledDisplay, dataURL, dataName]);
 
-    const layerStyle = {
-        id: 'point',
-        type: 'circle',
-        filter: ['!', ['has', 'point_count']],
-        paint: {
-          'circle-radius': 10,
-          'circle-color': colour
-        }
-      };
+    const layerStyle = props.layerStyle;
 
     const clusterCountLayer = {
         id: 'cluster-count',

@@ -13,7 +13,7 @@
 
  */
 import * as React from 'react';
-import Map from 'react-map-gl';
+import Map, { Source, Layer } from 'react-map-gl';
 import {useEffect, useState, useCallback} from 'react'
 import "../CSS/map.css"
 import { Button, Form } from 'react-bootstrap';
@@ -22,7 +22,7 @@ import { BsPlusLg } from 'react-icons/bs';
 import CountrySearch from '../components/map/countrySearch';
 import { variables } from '../configFiles/variables';
 import DisplaySource from '../components/map/displaySource';
- 
+import {listOfSources} from '../components/map/listOfSources';
 
 export default function SimpleMap() {
     // information can be found here: https://www.7timer.info/doc.php#astro
@@ -36,19 +36,23 @@ export default function SimpleMap() {
         latitude: 40,
         zoom: 3.5
       });
+    
+    let data = {};
+    listOfSources.forEach((source) => {
+        data[source.dataName] = source.defaultDisplay;
+
+    });
+    const [enableSource, setEnableSource] = useState(data);
 
     // for the return data from the api
     const [weatherData, setWeatherData] = useState({});
     // used to signal retrieval of data and to disable "Get Weather" Button when making a request
     const [signalGetInfo, setGetInfo] = useState(false);
 
-
-    // states for earthquake option 
-    const [enabledEarthquakeDisplay, setEarthquakeDisplay ] = useState(false);
-    const [enabledClustering, setClustering ] = useState(true);
-
-
     const [hoverInfo, setHoverInfo] = useState(null);
+
+    const [interactiveLayerIdsList, setInteractiveLayerIdsList] = useState([]);
+
 
     // request information from API
     useEffect(() => {
@@ -81,6 +85,8 @@ export default function SimpleMap() {
             .then(() => setGetInfo(false));
         }
     }, [signalGetInfo, viewState])
+    
+
 
     const onHover = useCallback(event => {
         const {
@@ -101,23 +107,39 @@ export default function SimpleMap() {
                     <CountrySearch setViewState={setViewState}/>
                     {weatherData.weather? <p> Temperature: {weatherData.weather.temp} | Cloud Cover: {cloudCover[weatherData.weather.cloudCover]} | Wind Direction: {weatherData.weather.windDirection} | Wind Speed: {windSpeed[weatherData.weather.windSpeed]}</p> : <></>}
                     <Button onClick={() => {setGetInfo(true)}} disabled={signalGetInfo}>Get Weather</Button>
-                    <Form.Check label="Select to add Earthquake data." onClick={() => {setEarthquakeDisplay(!enabledEarthquakeDisplay)}}/>                   
+                    {listOfSources.map((source) => 
+                        <Form.Check
+                            key={source.dataName}
+                            label={`Select to view ${source.dataName} data.`} 
+                            onClick={() => {
+                                    setEnableSource((prevState) => {
+                                        return {...prevState, [source.dataName] : !enableSource[source.dataName]}
+                                    })
+                                }
+                            }
+                        />
+                    )}                   
                 </div>
                 <Map
                     {...viewState}
                     onMove={evt => setViewState(evt.viewState)}
                     mapStyle="mapbox://styles/mapbox/streets-v11"
-                    interactiveLayerIds={['point']}
+                    interactiveLayerIds={interactiveLayerIdsList}
                     onMouseMove={onHover}
                     mapboxAccessToken={variables.MAPBOX_ACCESS_TOKEN}
                 >  
-                    <DisplaySource 
-                        enabledDisplay = {enabledEarthquakeDisplay} 
-                        layerColour={"blue"} 
-                        dataURL= {variables.BACKEND_URL + "map/getEarthquakeData"} 
-                        cluster={enabledClustering}
-                        dataName={"earthquakes"}
-                    />
+                    {listOfSources.map((source) => 
+                        <DisplaySource 
+                            enabledDisplay = {enableSource[source.dataName]} 
+                            layerColour={source.layerColour} 
+                            dataURL= {source.dataURL} 
+                            cluster={source.enableClustering}
+                            dataName={source.dataName}
+                            setInteractiveLayerIdsList={setInteractiveLayerIdsList}
+                            layerStyle={source.layerStyle}
+                        />
+                    )}
+                    
                     {hoverInfo && (
                         <div id="tooltip" style={{left: hoverInfo.x, top: hoverInfo.y}}>
                             {Object.keys(hoverInfo.feature.properties).map((value) => 
