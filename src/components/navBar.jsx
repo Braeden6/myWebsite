@@ -1,9 +1,6 @@
 import React, {useEffect} from 'react';
 import "../CSS/navBar.css";
 import {Container, Nav, Navbar, NavDropdown, Offcanvas} from 'react-bootstrap'
-import { AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
-import { SignInButton } from './SignInButton';
-import { SignOutButton } from './SignOutButton';
 import { useMsal } from "@azure/msal-react";
 import CreateAccount from "../helpers/callsAPI/createAccount";
 
@@ -36,19 +33,12 @@ export default function NavBar(style) {
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3" style={{"color":style.color}}>
                   <Nav.Link href="/" style={{"color":style.color}}>Home</Nav.Link>
-                  <Nav.Link href="/map" style={{"color":style.color}}>Map</Nav.Link>
-                  <NavDropdown title={<span style={{color:style.color}} id="dropdown-title">Resume</span>} id="nav-dropdown" align="end">
+                  <Nav.Link href="/map" style={{"color":style.color}} disabled>Map</Nav.Link>
+                  <NavDropdown title={<span style={{color:style.color}} id="dropdown-title">Resume</span>} id="nav-dropdown" align="end" disabled>
                     <NavDropdown.Item href="/myResume">My Resume</NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="/resumeBuilder" >Resume Builder</NavDropdown.Item>
                   </NavDropdown>
-                  <UnauthenticatedTemplate>
-                    <SignInButton color={style.color}/>
-                  </UnauthenticatedTemplate>
-                  <AuthenticatedTemplate>
-                    <SignOutButton color={style.color}/>
-                    <Nav.Link style={{"color":style.color}}>Welcome {accounts.length > 0 ?accounts[0].name: "..."} </Nav.Link>
-                  </AuthenticatedTemplate>
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
