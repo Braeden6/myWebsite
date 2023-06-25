@@ -1,0 +1,50 @@
+name: Build and Deploy to Google Cloud Run
+
+on:
+  push:
+    branches:
+      - main  # Set a branch name to trigger deployment
+
+env:
+  PROJECT_ID: the-programming-lab-390922
+  SERVICE_NAME: client
+  REPO_NAME: braedens-personal-website
+  REGION: us-central1
+  IMAGE: us-central1-docker.pkg.dev/the-programming-lab-390922/braedens-personal-website/client
+
+
+jobs:
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v0'
+      with:
+        token_format: 'access_token'
+        workload_identity_provider: ${{ secrets.GKE_WORKLOAD_IDENTITY_PROVIDER }}
+        service_account: ${{ secrets.GKE_SA_EMAIL }}
+
+    - name: Configure Docker
+      run: |
+        gcloud --quiet auth configure-docker ${{ env.REGION }}-docker.pkg.dev
+
+    - name: Build Docker image
+      run: docker build -t ${{ env.IMAGE }} .
+
+    - name: Push Docker image to GCR
+      run: docker push ${{ env.IMAGE }}
+
+    - name: Deploy to Cloud Run
+      run: |
+        gcloud run deploy ${{ env.SERVICE_NAME }} \
+            --image ${{ env.IMAGE }} \
+            --region ${{ env.REGION }} \
+            --platform managed \
+            --allow-unauthenticated \
+            --port 4173  # Set the port to your application's port

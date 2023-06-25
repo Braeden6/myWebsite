@@ -14,14 +14,15 @@
  */
 import * as React from 'react';
 import Map, { Source, Layer } from 'react-map-gl';
-import {useEffect, useState, useCallback, useRef} from 'react'
+import {useEffect, useState, useCallback} from 'react'
 import "../CSS/map.css"
 import { Button, Form } from 'react-bootstrap';
 import NavBar from '../components/navBar';
 import { BsPlusLg } from 'react-icons/bs';
 import CountrySearch from '../components/map/countrySearch';
 import { variables } from '../configFiles/variables';
- 
+import DisplaySource from '../components/map/displaySource';
+import {listOfSources} from '../components/map/listOfSources';
 
 export default function SimpleMap() {
     // information can be found here: https://www.7timer.info/doc.php#astro
@@ -35,17 +36,23 @@ export default function SimpleMap() {
         latitude: 40,
         zoom: 3.5
       });
+    
+    let data = {};
+    listOfSources.forEach((source) => {
+        data[source.dataName] = source.defaultDisplay;
+
+    });
+    const [enableSource, setEnableSource] = useState(data);
 
     // for the return data from the api
     const [weatherData, setWeatherData] = useState({});
-
     // used to signal retrieval of data and to disable "Get Weather" Button when making a request
     const [signalGetInfo, setGetInfo] = useState(false);
 
-    // states for earthquake option 
-    const [enabledEarthquakeDisplay, setEarthquakeDisplay ] = useState(false);
-    const [earthquakeData, setEarthquakeData] = useState(null);
     const [hoverInfo, setHoverInfo] = useState(null);
+
+    const [interactiveLayerIdsList, setInteractiveLayerIdsList] = useState([]);
+
 
     // request information from API
     useEffect(() => {
@@ -78,55 +85,8 @@ export default function SimpleMap() {
             .then(() => setGetInfo(false));
         }
     }, [signalGetInfo, viewState])
-
     
-    let earthquakeDataInitialized = useRef(false);
-    // get earthquake data if not already obtained
-    useEffect(() => {
-        if (enabledEarthquakeDisplay && !earthquakeDataInitialized.current ) {
-            earthquakeDataInitialized.current = true;
-            fetch(variables.BACKEND_URL + "map/getEarthquakeData",{
-                    method: 'GET'
-                })
-            .then((res) => res.json())
-            .then((data) => setEarthquakeData({
-                "type" : "FeatureCollection",
-                "features": data.earthquakes
-            }))
-        }
-    }, [enabledEarthquakeDisplay]);
 
-    const layerStyle = {
-        id: 'point',
-        type: 'circle',
-        filter: ['!', ['has', 'point_count']],
-        paint: {
-          'circle-radius': 10,
-          'circle-color': '#007cbf'
-        }
-      };
-
-      const clusterCountLayer = {
-        id: 'cluster-count',
-        type: 'symbol',
-        source: 'earthquakes',
-        filter: ['has', 'point_count'],
-        layout: {
-          'text-field': '{point_count_abbreviated}',
-          'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-          'text-size': 12
-        }
-      };
-
-    const clusterStyle = {
-        id: 'cluster',
-        type: 'circle',
-        filter: ['has', 'point_count'],
-        paint: {
-            'circle-color': ['step', ['get', 'point_count'], '#51bbd6', 100, '#f1f075', 750, '#f28cb1'],
-            'circle-radius': ['step', ['get', 'point_count'], 20, 100, 30, 750, 40]
-        }
-    }
 
     const onHover = useCallback(event => {
         const {
@@ -147,38 +107,46 @@ export default function SimpleMap() {
                     <CountrySearch setViewState={setViewState}/>
                     {weatherData.weather? <p> Temperature: {weatherData.weather.temp} | Cloud Cover: {cloudCover[weatherData.weather.cloudCover]} | Wind Direction: {weatherData.weather.windDirection} | Wind Speed: {windSpeed[weatherData.weather.windSpeed]}</p> : <></>}
                     <Button onClick={() => {setGetInfo(true)}} disabled={signalGetInfo}>Get Weather</Button>
-                    <Form.Check label="Select to add Earthquake data." onClick={() => {setEarthquakeDisplay(!enabledEarthquakeDisplay)}}/>                   
+                    {listOfSources.map((source) => 
+                        <Form.Check
+                            key={source.dataName}
+                            label={`Select to view ${source.dataName} data.`} 
+                            onClick={() => {
+                                    setEnableSource((prevState) => {
+                                        return {...prevState, [source.dataName] : !enableSource[source.dataName]}
+                                    })
+                                }
+                            }
+                        />
+                    )}                   
                 </div>
                 <Map
                     {...viewState}
                     onMove={evt => setViewState(evt.viewState)}
                     mapStyle="mapbox://styles/mapbox/streets-v11"
-                    interactiveLayerIds={enabledEarthquakeDisplay && earthquakeData !== null? ['point']: []}
+                    interactiveLayerIds={interactiveLayerIdsList}
                     onMouseMove={onHover}
                     mapboxAccessToken={variables.MAPBOX_ACCESS_TOKEN}
                 >  
+                    {listOfSources.map((source) => 
+                        <DisplaySource 
+                            enabledDisplay = {enableSource[source.dataName]} 
+                            layerColour={source.layerColour} 
+                            dataURL= {source.dataURL} 
+                            cluster={source.enableClustering}
+                            dataName={source.dataName}
+                            setInteractiveLayerIdsList={setInteractiveLayerIdsList}
+                            layerStyle={source.layerStyle}
+                        />
+                    )}
                     
-                    {enabledEarthquakeDisplay && earthquakeData !== null &&
-                        <Source 
-                            id="earthquakes" 
-                            type="geojson" 
-                            data={earthquakeData}
-                            cluster={true}
-                        >
-                            <Layer {...clusterStyle}/>
-                            <Layer {...clusterCountLayer} />
-                            <Layer {...layerStyle} />
-                        </Source>
-                        }
                     {hoverInfo && (
                         <div id="tooltip" style={{left: hoverInfo.x, top: hoverInfo.y}}>
-                            <div>Type: {hoverInfo.feature.properties.type}</div>
-                            <div>Time: {hoverInfo.feature.properties.time}</div>
-                            <div>Date: {hoverInfo.feature.properties.date}</div>
-                            <div>Magnitude: {hoverInfo.feature.properties.magnitude}</div>
-                            <div>Depth: {hoverInfo.feature.properties.depth}</div>
+                            {Object.keys(hoverInfo.feature.properties).map((value) => 
+                                <div key={hoverInfo.feature.properties[value]}>{value.charAt(0).toUpperCase() + value.slice(1)}: {hoverInfo.feature.properties[value]}</div>
+                            )}  
                         </div>
-                        )}
+                    )}
                 </Map>
                 
             </div>
