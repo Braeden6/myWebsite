@@ -1,6 +1,5 @@
 
 // EFFECT: Makes call API addUser. Creates account if not already in database
-// REQUIRES: instance and accounts from useMsal from "@azure/msal-react"
 // MODIFIES: none of the inputs
 import { variables } from "../../configFiles/variables";
 export default async function CreateAccount(instance, accounts) { 

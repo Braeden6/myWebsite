@@ -10,7 +10,6 @@ Tools used:
 - JavaScript: main programming language
 - [NPM](https://www.npmjs.com/): package manager
 - [Mapbox-gl](https://docs.mapbox.com/help/tutorials/use-mapbox-gl-js-with-react/): used for map in `/map` route
-- [MSAL](https://learn.microsoft.com/en-us/azure/active-directory/develop/msal-overview): microsoft login system</br>
 
 All this is deployed to Microsoft Azure Web App.
 

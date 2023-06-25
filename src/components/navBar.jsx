@@ -1,18 +1,9 @@
 import React, {useEffect} from 'react';
 import "../CSS/navBar.css";
 import {Container, Nav, Navbar, NavDropdown, Offcanvas} from 'react-bootstrap'
-import { useMsal } from "@azure/msal-react";
-import CreateAccount from "../helpers/callsAPI/createAccount";
 
 // https://react-bootstrap.github.io/components/navbar/
 export default function NavBar(style) {
-  const { instance, accounts } = useMsal();
-
-  useEffect(() => {
-    if (accounts.length > 0) {
-      CreateAccount(instance, accounts);
-    }
-  }, [accounts, instance]);
 
   return (
     <div id="navbar-wrapper">

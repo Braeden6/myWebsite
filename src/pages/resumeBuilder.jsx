@@ -3,14 +3,9 @@
   Braeden's Personal Website
   Author: Braeden Norman
   Date: 2022-10-27
-
-  Helpful Information
-
-  Authentication Template Msal: https://learn.microsoft.com/en-us/azure/active-directory/develop/tutorial-v2-react
  */
 import ResumeEditor from "../helpers/resume/resumeEditor";
 import NavBar from "../components/navBar";
-import { useMsal } from "@azure/msal-react";
 import { Button, Dropdown, Form, OverlayTrigger, Stack, Tooltip } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import GetResumeList from "../helpers/callsAPI/getResumeList";
@@ -18,8 +13,6 @@ import GetResume from "../helpers/callsAPI/getResume";
 import SaveResume from "../helpers/callsAPI/saveResume";
 import DeleteResume from "../helpers/callsAPI/deleteResume";
 import defaultResume from "../helpers/resume/defaultResume.json";
-
-import { AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
 
 function updateResumeList(instance, accounts, setResumeList) {
     GetResumeList(instance, accounts)
@@ -31,8 +24,6 @@ export default function ResumeBuilder() {
     const [ resumeList, setResumeList ] = useState(null);
     const [ resume, setResume ] = useState(defaultResume);
     const [ saveName, setSaveName ] = useState("Default Resume");
-
-    const { instance, accounts } = useMsal();
 
     useEffect(() => {
         updateResumeList(instance,accounts,setResumeList);

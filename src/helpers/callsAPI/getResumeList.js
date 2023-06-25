@@ -1,6 +1,5 @@
 
 // EFFECT: Makes call API getResumeList. Returns list of saved resumes of user
-// REQUIRES: instance and accounts from useMsal from "@azure/msal-react"
 // MODIFIES: none of the input
 // RETURNS: List of strings that are the names of saved resumes
 import { variables } from "../../configFiles/variables";
