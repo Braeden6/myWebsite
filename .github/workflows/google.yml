@@ -51,4 +51,4 @@ jobs:
             --region ${{ env.REGION }} \
             --platform managed \
             --allow-unauthenticated \
-            --port 4173  # Set the port to your application's port
+            --port 3000  # Set the port to your application's port
