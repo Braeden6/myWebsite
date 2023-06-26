@@ -52,3 +52,7 @@ jobs:
             --platform managed \
             --allow-unauthenticated \
             --port 4173  # Set the port to your application's port
+
+    - name: Map Custom Domain
+      run: |
+        gcloud beta run domain-mappings create --service ${{ env.SERVICE_NAME }} --domain braedensconsulting.com --region ${{ env.REGION }}
