@@ -1,4 +1,4 @@
-import { variables } from '../../configFiles/variables';
+//import { variables } from '../../configFiles/variables';
 
 export const listOfSources = [
 
@@ -7,7 +7,7 @@ export const listOfSources = [
         defaultDisplay : false,
         enableClustering: true, 
         layerColour : "blue",
-        dataURL : variables.BACKEND_URL + "map/getEarthquakeData",
+        dataURL : process.env.NEXT_PUBLIC_API_URL+ "/earthquakes",
         dataName : "earthquakes",
         layerStyle :{
             id: "earthquakes",
@@ -25,7 +25,7 @@ export const listOfSources = [
         defaultDisplay : false,
         enableClustering: false,            
         layerColour : "blue",
-        dataURL : variables.BACKEND_URL + "map/getCountryBorder",
+        dataURL : process.env.NEXT_PUBLIC_API_URL + "/map/getCountryBorder",
         dataName : "borders",
         layerStyle : {
             'id': 'borders',

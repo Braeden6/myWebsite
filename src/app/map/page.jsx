@@ -12,17 +12,18 @@
   7timer API information: https://www.7timer.info/doc.php#astro
 
  */
+"use client"
 import * as React from 'react';
 import Map, { Source, Layer } from 'react-map-gl';
 import {useEffect, useState, useCallback} from 'react'
-import "../CSS/map.css"
+import "./map.css"
 import { Button, Form } from 'react-bootstrap';
-import NavBar from '../components/navBar';
+import NavBar from '../components/orgamisms/navBar';
 import { BsPlusLg } from 'react-icons/bs';
-import CountrySearch from '../components/map/countrySearch';
-import { variables } from '../configFiles/variables';
-import DisplaySource from '../components/map/displaySource';
-import {listOfSources} from '../components/map/listOfSources';
+import CountrySearch from './countrySearch';
+//import { variables } from '../configFiles/variables';
+import DisplaySource from './displaySource';
+import {listOfSources} from './listOfSources';
 
 export default function SimpleMap() {
     // information can be found here: https://www.7timer.info/doc.php#astro
@@ -126,7 +127,7 @@ export default function SimpleMap() {
                     mapStyle="mapbox://styles/mapbox/streets-v11"
                     interactiveLayerIds={interactiveLayerIdsList}
                     onMouseMove={onHover}
-                    mapboxAccessToken={variables.MAPBOX_ACCESS_TOKEN}
+                mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
                 >  
                     {listOfSources.map((source) => 
                         <DisplaySource 
