@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 // import DeleteResume from "../helpers/callsAPI/deleteResume";
 import defaultResume from "../components/defaultResume.json";
 import "../myResume/resume.css";
+import { AuthProvider } from "../utils/auth";
 
 // function updateResumeList(instance, accounts, setResumeList) {
 //     GetResumeList(instance, accounts)
@@ -85,7 +86,8 @@ export default function ResumeBuilder() {
 
     return ( 
         <div id="resumeBuilderAll">
-            <NavBar color="black"/>
+            <AuthProvider>
+            <NavBar />
             <div id="resumeBuilder">
                     {/* <Stack direction="vertical" className="py-2">
                         <Stack direction="horizontal" className="mx-auto py-2">
@@ -110,6 +112,7 @@ export default function ResumeBuilder() {
                     </Stack>
             </div>
             <ResumeEditor resume={resume} setResume={setResume}/>
+            </AuthProvider>
         </div>
     );
 }
