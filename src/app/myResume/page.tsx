@@ -15,6 +15,7 @@ import ResumeViewer from "../components/orgamisms/resumeViewer"
 // import * as ReactDOM from "react-dom/client";
 // import  { useNavigate } from 'react-router-dom'
 import {Stack, Button} from 'react-bootstrap';
+import { AuthProvider } from '../utils/auth';
 // import { variables } from "../configFiles/variables";
 
 export default function MyResume() {
@@ -45,7 +46,8 @@ export default function MyResume() {
   
   return (
     <div id="myResumeAll">
-      <NavBar color="black"/>
+    <AuthProvider>
+      <NavBar/>
       <div id="myResume">
         <Stack className='mx-4 align-items-center justify-content-center text-center' >
           <Button  variant='primary' onClick={ () => {
@@ -54,6 +56,8 @@ export default function MyResume() {
         </Stack>
         {resume? <ResumeViewer resume={resume}/> : <></>}
       </div>
+    
+    </AuthProvider>
     </div>
   )
 }
