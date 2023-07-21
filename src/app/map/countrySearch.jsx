@@ -22,24 +22,35 @@ export default function CountrySearch(props) {
     const [locations, setLocations] = useState(null);
     const [locationSearch, setLocationSearch] = useState("");
 
-
     useEffect( () => {
-        fetch(process.env.NEXT_PUBLIC_API_URL + "map/getLocations",{
+        fetch(process.env.NEXT_PUBLIC_API_URL + "/countries",{
             method: 'GET'
         })
         .then((res) => res.json())
-        .then((data) => setLocations(data.locations))
+        .then((data) => setLocations(data))
     }, []);
 
 
-    const changeView = (coordinates) => {
-        setViewState((prevState) => {
-            return ({...prevState, 
-                longitude: Number(coordinates[0]),
-                latitude: Number(coordinates[1]),
-                zoom: 3.5})
-        }
-        )
+
+    const changeView = (country) => {
+        console.log(country);
+
+        
+
+        fetch(process.env.NEXT_PUBLIC_API_URL + `/country/${country}`,{
+            method: 'GET'
+        })
+        .then((res) => res.json())
+        .then((data) => console.log(data))
+
+
+        // setViewState((prevState) => {
+        //     return ({...prevState, 
+        //         longitude: Number(coordinates[0]),
+        //         latitude: Number(coordinates[1]),
+        //         zoom: 3.5})
+        // }
+        // )
 
     }
 
@@ -52,9 +63,9 @@ export default function CountrySearch(props) {
             { locations &&
             <Dropdown.Menu>
                 {locations.map((e) => {
-                    if (e.name.toLowerCase().includes(locationSearch.toLowerCase())) {
+                    if (e.toLowerCase().includes(locationSearch.toLowerCase())) {
                         return (
-                            <Dropdown.Item key={e.name} onClick={() => {changeView(e.coordinates)}}>{e.name}</Dropdown.Item>
+                            <Dropdown.Item key={e} onClick={() => {changeView(e)}}>{e}</Dropdown.Item>
                         )
                     }
                     return null;
