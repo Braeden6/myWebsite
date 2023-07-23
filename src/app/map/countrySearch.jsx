@@ -23,10 +23,16 @@ export default function CountrySearch(props) {
     const [locationSearch, setLocationSearch] = useState("");
 
     useEffect( () => {
+        console.log("Fetching Countries");
         fetch(process.env.NEXT_PUBLIC_API_URL + "/countries",{
             method: 'GET'
         })
-        .then((res) => res.json())
+        .then((res) => { 
+            if (res.status == 200) {
+                return res.json()
+            }
+            return [];
+        })
         .then((data) => setLocations(data))
     }, []);
 
