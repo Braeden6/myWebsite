@@ -74,6 +74,8 @@ export default function SimpleMap() {
 
   const [interactiveLayerIdsList, setInteractiveLayerIdsList] = useState([]);
 
+  const [country, setCountry] = useState([]);
+
   // request information from API
   useEffect(() => {
     if (signalGetInfo) {
@@ -138,7 +140,7 @@ export default function SimpleMap() {
             Longitude: {viewState.longitude.toFixed(2)} | Latitude:{" "}
             {viewState.latitude.toFixed(2)} | Zoom : {viewState.zoom.toFixed(1)}{" "}
           </p>
-          <CountrySearch setViewState={setViewState} />
+          <CountrySearch setViewState={setViewState} setCountry={setCountry}/>
           {weatherData.weather ? (
             <p>
               {" "}
@@ -181,7 +183,24 @@ export default function SimpleMap() {
           onMouseMove={onHover}
           mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
         >
-          {listOfSources.map((source, idx) => (
+        {/*    <Source type="geojson" data={{}}>
+           <Layer 
+            id="polygons"
+            type="fill"
+            paint={{
+              'fill-color': '#088',
+              'fill-opacity': 0.8
+            }}
+          /> 
+         </Source>*/}
+
+
+
+
+
+
+
+          {/* {listOfSources.map((source, idx) => (
             <DisplaySource
               enabledDisplay={enableSource[source.dataName]}
               layerColour={source.layerColour}
@@ -192,9 +211,9 @@ export default function SimpleMap() {
               layerStyle={source.layerStyle}
               key={idx}
             />
-          ))}
+          ))} */}
 
-          {hoverInfo && (
+          {/* {hoverInfo && (
             <div id="tooltip" style={{ left: hoverInfo.x, top: hoverInfo.y }}>
               {Object.keys(hoverInfo.feature.properties).map((value) => (
                 <div key={hoverInfo.feature.properties[value]}>
@@ -203,7 +222,7 @@ export default function SimpleMap() {
                 </div>
               ))}
             </div>
-          )}
+           )} */}
         </Map>
       </AuthProvider>
     </Box>

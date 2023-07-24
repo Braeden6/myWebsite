@@ -22,23 +22,40 @@ export default function CountrySearch(props) {
     const [locations, setLocations] = useState(null);
     const [locationSearch, setLocationSearch] = useState("");
 
-
     useEffect( () => {
-        fetch(process.env.NEXT_PUBLIC_API_URL + "map/getLocations",{
+        console.log("Fetching Countries");
+        fetch(process.env.NEXT_PUBLIC_API_URL + "/countries",{
             method: 'GET'
         })
-        .then((res) => res.json())
-        .then((data) => setLocations(data.locations))
+        .then((res) => { 
+            if (res.status == 200) {
+                return res.json()
+            }
+            return [];
+        })
+        .then((data) => setLocations(data))
     }, []);
 
 
-    const changeView = (coordinates) => {
+
+    const changeView = (country) => {
+        fetch(process.env.NEXT_PUBLIC_API_URL + `/country/${country}`,{
+            method: 'GET'
+        })
+        .then((res) => res.json())
+        .then((data) => 
+            
+        {
+
         setViewState((prevState) => {
             return ({...prevState, 
-                longitude: Number(coordinates[0]),
-                latitude: Number(coordinates[1]),
+                longitude: Number(data.properties.longitude),
+                latitude: Number(data.properties.latitude),
                 zoom: 3.5})
         }
+        )
+        props.setCountry(data);
+    }
         )
 
     }
@@ -52,9 +69,9 @@ export default function CountrySearch(props) {
             { locations &&
             <Dropdown.Menu>
                 {locations.map((e) => {
-                    if (e.name.toLowerCase().includes(locationSearch.toLowerCase())) {
+                    if (e.toLowerCase().includes(locationSearch.toLowerCase())) {
                         return (
-                            <Dropdown.Item key={e.name} onClick={() => {changeView(e.coordinates)}}>{e.name}</Dropdown.Item>
+                            <Dropdown.Item key={e} onClick={() => {changeView(e)}}>{e}</Dropdown.Item>
                         )
                     }
                     return null;

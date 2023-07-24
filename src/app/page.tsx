@@ -89,17 +89,13 @@ export default function Main() {
                 </Card.Header>
                 <Card.Body>
                   <Card.Text>
-                    <strong>Front-end:</strong> Uses React and Bootstrap, and
-                    hosted on Google Cloud Platform. For the map, it makes call
-                    to free APIs, based on given longitude and latitude, and
-                    gets information for the location.
+                    <strong>Front-end:</strong> Uses NextJS, React, Typescript, and Material UI
                   </Card.Text>
                   <Card.Text>
-                    <strong>Back-end:</strong> Uses Python FastAPI, and will use
-                    FireStore.
+                    <strong>Back-end:</strong> Uses Python and FastAPI
                   </Card.Text>
                   <Card.Text>
-                    This website is being move to GCP and being re-written.
+                    This website is being move to GCP and being re-written. Currently uses Firebase for authentication.
                   </Card.Text>
                   <Card.Footer>
                     <Stack
