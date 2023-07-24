@@ -39,24 +39,24 @@ export default function CountrySearch(props) {
 
 
     const changeView = (country) => {
-        console.log(country);
-
-        
-
         fetch(process.env.NEXT_PUBLIC_API_URL + `/country/${country}`,{
             method: 'GET'
         })
         .then((res) => res.json())
-        .then((data) => console.log(data))
+        .then((data) => 
+            
+        {
 
-
-        // setViewState((prevState) => {
-        //     return ({...prevState, 
-        //         longitude: Number(coordinates[0]),
-        //         latitude: Number(coordinates[1]),
-        //         zoom: 3.5})
-        // }
-        // )
+        setViewState((prevState) => {
+            return ({...prevState, 
+                longitude: Number(data.properties.longitude),
+                latitude: Number(data.properties.latitude),
+                zoom: 3.5})
+        }
+        )
+        props.setCountry(data);
+    }
+        )
 
     }
 

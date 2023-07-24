@@ -103,9 +103,9 @@ export const AuthProvider = ({ children}: Props) => {
   const app = initializeApp(config);
   const auth = getAuth(app);
 
-  getUserToken(auth).then((token) => {
-    console.log(token);
-  });
+  // getUserToken(auth).then((token) => {
+  //   console.log(token);
+  // });
 
 
   useEffect(() => {
